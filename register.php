@@ -12,7 +12,7 @@
     <div class="forms">
         <div class="form signup">
             <span class="title">Registration</span>
-            <form action="#">
+            <form action="register">
                 <div class="input-field">
                     <input type="text" placeholder="Enter your name" required>
                     <i class="uil uil-user"></i>

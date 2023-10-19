@@ -32,19 +32,19 @@
           </li>
 
           <li class="navbar-item">
-            <a href="#" class="navbar-link">About</a>
+            <a href="#" class="navbar-link">Hot Wheels</a>
           </li>
 
           <li class="navbar-item">
-            <a href="#" class="navbar-link">Products</a>
+            <a href="#" class="navbar-link">Categories</a>
           </li>
-
-          <li class="navbar-item">
+          
+          <!--<li class="navbar-item">
             <a href="#" class="navbar-link">Shop</a>
-          </li>
+          </li>-->
 
           <li class="navbar-item">
-            <a href="#" class="navbar-link">Blog</a>
+            <a href="#" class="navbar-link">About</a>
           </li>
 
           <li class="navbar-item">
