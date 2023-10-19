@@ -27,7 +27,6 @@
                     <input type="checkbox" id="logCheck">
                     <label for="logCheck" class="text">Remember me</label>
                 </div>
-                <a href="#" class="text">Forgot password?</a>
             </div>
             <div class="input-field button">
             <input type="button" value="Login Now"> </div>
