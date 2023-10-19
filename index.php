@@ -1,5 +1,5 @@
-<?php require_once 'header.php'; 
-    require_once 'menubar.php';
+<?php require 'header.php'; 
+    require 'menubar.php';
 ?>
 
   <main>
@@ -9,7 +9,7 @@
         - #HERO
       -->
 
-      <section class="section hero" style="background-image: url('./assets/images/hotwheels-banner.png')">
+      <section class="section hero" style="background-image: url('./assets/images/hotwheels-banner02.png')">
         <div class="container">
 
           <h2 class="h1 hero-title">
