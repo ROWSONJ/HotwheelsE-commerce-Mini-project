@@ -38,3 +38,38 @@ window.addEventListener("scroll", function () {
     goTopBtn.classList.remove("active");
   }
 });
+
+
+$(document).ready(function () {
+  // Add a click event listener to the filter buttons
+  $('.filter-btn').click(function () {
+      // Get the selected carbrand_name from the data attribute
+      var carbrandName = $(this).data('carbrand');
+
+      if (carbrandName === 'All') {
+          // If "All" is selected, clear the filter
+          resetFilter();
+      } else {
+          // Send an AJAX request to retrieve filtered products
+          sendFilterRequest(carbrandName);
+      }
+  });
+
+  function resetFilter() {
+      // Send an AJAX request to retrieve all products
+      sendFilterRequest('');
+  }
+
+  function sendFilterRequest(carbrandName) {
+      // Send an AJAX request to retrieve filtered products
+      $.ajax({
+          type: 'POST',
+          url: 'filter_products.php',
+          data: { carbrand: carbrandName }, // Make sure the parameter name matches your PHP code
+          success: function (data) {
+              // Update the product list with the filtered products
+              $('#product-list').php(data);
+          }
+      });
+  }
+});

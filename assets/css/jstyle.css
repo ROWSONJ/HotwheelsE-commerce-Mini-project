@@ -173,14 +173,14 @@ body {
 }
 
 .btn {
-  background: var(--background, var(--bittersweet));
-  color: var(--color, var(--white));
+  background: var(--background, var(--white));
+  color: var(--color, var(--black));
   font-size: var(--fs-5);
   display: flex;
   align-items: center;
   gap: 5px;
   padding: 14px 25px;
-  border: 1px solid var(--border-color, var(--bittersweet));
+  border: 1px solid var(--border-color, var(--white));
 }
 
 .btn-primary:is(:hover, :focus) {

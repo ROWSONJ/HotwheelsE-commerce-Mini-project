@@ -16,7 +16,7 @@
     - custom css link
   -->
   <link rel="stylesheet" href="assets\css\jstyle.css">
-
+  
   <!-- 
     - google font link
   -->
@@ -30,5 +30,11 @@
     - preload banner
   -->
   <link rel="preload" href="./assets/images/hotwheels-banner.png" as="image">
+
+  <!-- 
+    - Jqurey CDN & custom js link
+  -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="./assets/js/script.js"></script>
 
 </head>
