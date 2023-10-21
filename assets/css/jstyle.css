@@ -153,6 +153,10 @@ body {
 .h3,
 .h4 { color: var(--rich-black-fogra-29); } 
 
+.h4.card-titlet {
+  color: whitesmoke;
+}
+
 .h1 {
   font-size: var(--fs-1);
   font-weight: var(--fw-300);
@@ -186,8 +190,9 @@ body {
 
 .btn-secondary {
   --background: transparent;
-  --border-color: var(--black);
-  --color: var(--black);
+  --border-color: var(--white);
+  border-bottom-width: thick;
+  --color: var(--white);
 }
 
 .btn-secondary:is(:hover, :focus) { --background: hsla(0, 0%, 0%, 0.1); }

@@ -8,7 +8,7 @@
       <div class="overlay" data-overlay></div>
 
       <a href="#" class="logo">
-        <img src="./assets/images/logo.svg" width="160" height="50" alt="Footcap logo">
+        <img src="./assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
       </a>
 
       <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
@@ -36,12 +36,12 @@
           </li>
 
           <li class="navbar-item">
-            <a href="#" class="navbar-link">Categories</a>
+            <a href="#" class="navbar-link">Ready to ship</a>
           </li>
           
-          <!--<li class="navbar-item">
-            <a href="#" class="navbar-link">Shop</a>
-          </li>-->
+          <li class="navbar-item">
+            <a href="#" class="navbar-link">Upcoming</a>
+          </li>
 
           <li class="navbar-item">
             <a href="#" class="navbar-link">About</a>
@@ -64,7 +64,7 @@
           </li>
 
           <li>
-            <a href="#" class="nav-action-btn">
+            <a href="login.php" class="nav-action-btn">
               <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
 
               <span class="nav-action-text">Login / Register</span>
@@ -72,13 +72,13 @@
           </li>
 
           <li>
-            <button class="nav-action-btn">
+            <a href="test.php" class="nav-action-btn">
               <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
               <span class="nav-action-text">Wishlist</span>
 
               <data class="nav-action-badge" value="5" aria-hidden="true">5</data>
-            </button>
+            </a>
           </li>
 
           <li>
