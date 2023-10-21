@@ -206,7 +206,7 @@ body {
   --color: var(--white);
 }
 
-.btn-secondary:is(:hover, :focus) { --background: hsla(0, 0%, 0%, 0.1); }
+.btn-secondary:is(:hover, :focus) { --background: hsla(0, 0%, 100%, 0.1); }
 
 .has-scrollbar {
   display: flex;

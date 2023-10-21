@@ -1,3 +1,45 @@
+$(document).ready(function () {
+  // Add a click event listener to the filter buttons
+  $('.filter-btn').click(function () {
+      // Get the selected carbrand_name from the data attribute
+      var carbrandName = $(this).data('carbrand');
+
+      if (carbrandName === 'All') {
+          // If "All" is selected, clear the filter and display the default product list
+          displayDefaultProducts();
+      } else {
+          // Send an AJAX request to retrieve filtered products
+          sendFilterRequest(carbrandName);
+      }
+  });
+
+  function displayDefaultProducts() {
+      // Use AJAX to fetch and display the default product list
+      $.ajax({
+          type: 'POST',
+          url: 'default_products.php', // Create a new PHP file to handle the default product list
+          success: function (data) {
+              // Update the product list with the default products
+              $('#product-list').html(data);
+          }
+      });
+  }
+
+  function sendFilterRequest(carbrandName) {
+      // Send an AJAX request to retrieve filtered products
+      $.ajax({
+          type: 'POST',
+          url: 'filter_products.php', // Create a new PHP file to handle filtered products
+          data: { carbrand: carbrandName },
+          success: function (data) {
+              // Update the product list with the filtered products
+              $('#product-list').html(data);
+          }
+      });
+  }
+});
+
+
 'use strict';
 
 
@@ -36,40 +78,5 @@ window.addEventListener("scroll", function () {
   } else {
     header.classList.remove("active");
     goTopBtn.classList.remove("active");
-  }
-});
-
-
-$(document).ready(function () {
-  // Add a click event listener to the filter buttons
-  $('.filter-btn').click(function () {
-      // Get the selected carbrand_name from the data attribute
-      var carbrandName = $(this).data('carbrand');
-
-      if (carbrandName === 'All') {
-          // If "All" is selected, clear the filter
-          resetFilter();
-      } else {
-          // Send an AJAX request to retrieve filtered products
-          sendFilterRequest(carbrandName);
-      }
-  });
-
-  function resetFilter() {
-      // Send an AJAX request to retrieve all products
-      sendFilterRequest('');
-  }
-
-  function sendFilterRequest(carbrandName) {
-      // Send an AJAX request to retrieve filtered products
-      $.ajax({
-          type: 'POST',
-          url: 'filter_products.php',
-          data: { carbrand: carbrandName }, // Make sure the parameter name matches your PHP code
-          success: function (data) {
-              // Update the product list with the filtered products
-              $('#product-list').php(data);
-          }
-      });
   }
 });

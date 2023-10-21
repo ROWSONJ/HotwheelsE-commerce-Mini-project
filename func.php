@@ -1,6 +1,8 @@
 <?php
-    require 'conn.php';
-    function tablequery($conn,$table){   
+    include_once('conn.php');
+
+    function tablequery($table){   
+    $conn = conndb();
     $sql = "$table";
     $result = $conn->query($sql);
     if(!$result){

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Footcap - Find your footware</title>
+  <title>FAST LANE</title>
 
   <!-- 
     - favicon
@@ -29,7 +29,7 @@
   <!-- 
     - preload banner
   -->
-  <link rel="preload" href="./assets/images/hotwheels-banner.png" as="image">
+  <link rel="preload" href="./assets/images/hotwheels-banner02.png" as="image">
 
   <!-- 
     - Jqurey CDN & custom js link
