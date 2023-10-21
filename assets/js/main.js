@@ -29,7 +29,6 @@ login.addEventListener("click", ( )=>{
  container.classList.remove("active");
 });
 
-/*<!-- Code injected by live-server -->*/
 if ('WebSocket' in window) {
  (function() {
 	 function refreshCSS() {
