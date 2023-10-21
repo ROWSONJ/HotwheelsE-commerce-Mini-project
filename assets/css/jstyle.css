@@ -155,8 +155,19 @@ body {
 
 .h4.card-titlet {
   color: whitesmoke;
+  font-size: 1.4vw
 }
 
+@media screen and (max-width: 768px) {
+  .h4.card-titlet{
+      font-size: 2.8vw
+  }
+}
+@media screen and (max-width: 450px) {
+  .h4.card-titlet{
+      font-size: 2.8vw
+  }
+}
 .h1 {
   font-size: var(--fs-1);
   font-weight: var(--fw-300);

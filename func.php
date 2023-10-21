@@ -1,6 +1,6 @@
 <?php
-    function tablequery($table){    
     require 'conn.php';
+    function tablequery($conn,$table){   
     $sql = "$table";
     $result = $conn->query($sql);
     if(!$result){

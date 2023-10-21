@@ -43,9 +43,11 @@
         <div class="container">
             <ul class="collection-list has-scrollbar">;
         <?php
-                    $result = tablequery('SELECT * FROM categories');
-                    if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) { 
+                    $result = tablequery($conn, 'SELECT * FROM categories');
+                    // Check if the query executed successfully
+                    if ($result) {
+                        // Use foreach to iterate through the result set
+                        foreach ($result as $row)  { 
                             echo '<li>
                             <div class="collection-card" style="background-image: url(./assets/images/'.$row['c_image'].')">
                                 <h3 class="h4 card-titlet">'.$row['category_name'].'</h3>
