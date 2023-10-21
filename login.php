@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,25 +19,53 @@
       <div class="forms">
         <div class="form login">
           <span class="title">Login</span>
-          <form action="#">
+          <form action="login_db.php" method="post">
+          <?php if(isset($_SESSION['error'])){?>
+                    <label>
+                        <input type="checkbox" class="alertCheckbox" autocomplete="off" />
+                            <div class="alert error">
+                                <span class="alertClose">X</span>
+                                <span class="alertText">
+                                    <?php
+                                        echo $_SESSION['error'];
+                                        unset($_SESSION['error']);
+                                    ?>
+                                    <br class="clear"/>
+                                </span>
+                            </div>
+                    </label>   
+                <?php }?>
+                <?php if(isset($_SESSION['user_login'])){?>
+                    <label>
+                        <input type="checkbox" class="alertCheckbox" autocomplete="off" />
+                            <div class="alert success">
+                                <span class="alertClose">X</span>
+                                <span class="alertText">
+                                    <?php
+                                        echo $_SESSION['user_login'];
+                                        unset($_SESSION['user_login']);
+                                    ?>
+                                    <br class="clear"/>
+                                </span>
+                            </div>
+                    </label>   
+                <?php }?>
             <div class="input-field">
-              <input type="text" placeholder="Enter your email" required>
+              <input type="text" name="email" placeholder="Enter your email" required>
               <i class="uil uil-envelope icon"></i>
             </div>
             <div class="input-field">
-              <input type="password" class="password" placeholder="Enter your password" required>
+              <input type="password" class="password" name="password" placeholder="Enter your password" required>
               <i class="uil uil-lock icon"></i>
-              <i class="uil uil-eye-slash showHidePw"></i>
             </div>
             <div class="checkbox-text">
               <div class="checkbox-content">
                 <input type="checkbox" id="logCheck">
                 <label for="logCheck" class="text">Remember me</label>
               </div>
-              <a href="#" class="text">Forgot password?</a>
             </div>
             <div class="input-field button">
-              <input type="button" value="Login Now"> </div>
+              <input type="submit" value="Login" name="login"> </div>
           </form>
           <div class="login-signup">
           <span class="text">Not a member? <a href="register.php" class="text signup-link">Signup now</a></span>

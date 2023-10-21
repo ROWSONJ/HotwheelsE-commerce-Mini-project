@@ -70,7 +70,6 @@
                     $stmt->bindParam(":dob", $dob);
                     $stmt->bindParam(":address", $address);
                     $stmt->execute();
-                    
                     $_SESSION['success'] = "Signup Success! <a href='login.php' >login</a>";
                     header("location: register.php");
                 }else{
@@ -78,7 +77,7 @@
                     header("location: register.php");
                 }
 
-            }catch(PDOException $e){ 
+            }catch(PDOException $e){
                 echo $e->getMessage();
             }
         }
