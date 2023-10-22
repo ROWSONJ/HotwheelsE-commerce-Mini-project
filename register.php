@@ -78,7 +78,7 @@ require 'conn.php';
                         <i class="uil uil-lock icon"></i>
                     </div>
                     <div class="input-field button">
-                        <input type="button" value="Next" name="signup" class="text signup-link"> 
+                        <input type="button" value="Next" name="Next" class="text signup-link"> 
                     </div>
                     <div class="login-signup">
                             <span class="text">Already registered? <a href="login.php" class="text signup-link">Login</a></span>
@@ -108,7 +108,10 @@ require 'conn.php';
                     <div class="input-field">
                         <input type="text" name="address" placeholder="Enter your address" required>
                         <i class="uil uil-at"></i>
-                    </div>                
+                    </div>   
+                    <div class="input-field button" >
+                        <input type="button" value="Previous" name="previous" class="text login-link"> 
+                    </div>             
                     <div class="input-field button">
                             <input type="submit" value="Signup" id="signup" name="signup">
                     </div>

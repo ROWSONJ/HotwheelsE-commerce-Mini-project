@@ -35,21 +35,6 @@ session_start();
                             </div>
                     </label>   
                 <?php }?>
-                <?php if(isset($_SESSION['user_login'])){?>
-                    <label>
-                        <input type="checkbox" class="alertCheckbox" autocomplete="off" />
-                            <div class="alert success">
-                                <span class="alertClose">X</span>
-                                <span class="alertText">
-                                    <?php
-                                        echo $_SESSION['user_login'];
-                                        unset($_SESSION['user_login']);
-                                    ?>
-                                    <br class="clear"/>
-                                </span>
-                            </div>
-                    </label>   
-                <?php }?>
             <div class="input-field">
               <input type="text" name="email" placeholder="Enter your email" required>
               <i class="uil uil-envelope icon"></i>
