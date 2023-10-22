@@ -153,6 +153,21 @@ body {
 .h3,
 .h4 { color: var(--rich-black-fogra-29); } 
 
+.h4.card-titlet {
+  color: whitesmoke;
+  font-size: 1.4vw
+}
+
+@media screen and (max-width: 768px) {
+  .h4.card-titlet{
+      font-size: 2.8vw
+  }
+}
+@media screen and (max-width: 450px) {
+  .h4.card-titlet{
+      font-size: 2.8vw
+  }
+}
 .h1 {
   font-size: var(--fs-1);
   font-weight: var(--fw-300);
@@ -169,14 +184,14 @@ body {
 }
 
 .btn {
-  background: var(--background, var(--bittersweet));
-  color: var(--color, var(--white));
+  background: var(--background, var(--white));
+  color: var(--color, var(--black));
   font-size: var(--fs-5);
   display: flex;
   align-items: center;
   gap: 5px;
   padding: 14px 25px;
-  border: 1px solid var(--border-color, var(--bittersweet));
+  border: 1px solid var(--border-color, var(--white));
 }
 
 .btn-primary:is(:hover, :focus) {
@@ -186,11 +201,12 @@ body {
 
 .btn-secondary {
   --background: transparent;
-  --border-color: var(--black);
-  --color: var(--black);
+  --border-color: var(--white);
+  border-bottom-width: thick;
+  --color: var(--white);
 }
 
-.btn-secondary:is(:hover, :focus) { --background: hsla(0, 0%, 0%, 0.1); }
+.btn-secondary:is(:hover, :focus) { --background: hsla(0, 0%, 100%, 0.1); }
 
 .has-scrollbar {
   display: flex;
