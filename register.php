@@ -16,7 +16,7 @@ require 'conn.php';
 <div class="container ">
     <form action="register_db.php" method="post">
         <div class="forms" >
-            <div class="form login">
+            <div class="form login"  >
             <span class="title">Registration</span>
                 <?php if(isset($_SESSION['error'])){?>
                     <label>
@@ -86,9 +86,9 @@ require 'conn.php';
 
 
 
-            <div class="form signup">
+            <div class="form signup" style="height:105%;">
             <span class="title">Registration</span>
-                    <div class="input-field">
+                    <div class="input-field" style="margin-top:10px">
                         <input type="text" name="firstname" placeholder="Enter your first name" required>
                         <i class="uil uil-user"></i>
                     </div>
