@@ -1,13 +1,13 @@
 <?php 
     require 'header.php'; 
     require 'menubar.php';
+    require_once 'conn.php';
 
-    require 'conn.php';
-    $sql = "SELECT * FROM users";
-    $result = $conn->query($sql);
-    if(!$result){
-        die("Error : ". $conn->$conn_error);
+    if(!isset($_SESSION['user_login'])){
+      //อย่าลืมทำalertให้เข้าสู่ระบบ
+      header('location: login.php');
     }
+    
 ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -29,7 +29,7 @@
       } 
 
       .profile{
-        position: flex;
+        position: fixed;
         z-index:3;
         top:50%;
         left:50%;
@@ -78,9 +78,22 @@
   <div class="row">
     <div class="col">
       <div class="profile">
+        <?php
+        
+        if(isset($_SESSION['user_login'])){
+          $user_id = $_SESSION['user_login'];
+          $stmt = $conn->query("SELECT * users WHERE user_id = $user_id");
+          $stmt->execute();
+          $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        }
+        ?>
         <img src="tumblr_b006d16d4b0d4a213d0ad2b818e6e6b8_3df43155_540.jpg" alt="">
-        <h2> username</h2>
-        <p>fname lname</p>
+        
+        <h2> <?php echo $row['username']?></h2>
+
+        <p><?php echo $row['first_name'].' '.$row['last_name']?>/p>
+
         <div class="position-absolute top-0 end-0">
           <a href='editprofile.php'>
             <button type="button" class="btn btn-outline-secondary" style="margin:20px;">

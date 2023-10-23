@@ -36,6 +36,7 @@ body{
 
 .container .form{
     width: 50%;
+    height: 600px;
     padding: 30px;
     background-color: #fff;
     transition: margin-left 0.18s ease;

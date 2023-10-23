@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'conn.php';
 ?>
 
@@ -110,10 +109,8 @@ require 'conn.php';
                         <i class="uil uil-at"></i>
                     </div>   
                     <div class="input-field button" >
-                        <input type="button" value="Previous" name="previous" class="text login-link"> 
-                    </div>             
-                    <div class="input-field button">
-                            <input type="submit" value="Signup" id="signup" name="signup">
+                        <input type="button" value="Previous" name="previous" class="text login-link">
+                        <input type="submit" value="Signup" id="signup" name="signup" style="margin-top: 60px;">
                     </div>
               
             </div>

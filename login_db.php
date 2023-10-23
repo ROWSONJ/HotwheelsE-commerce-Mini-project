@@ -1,6 +1,4 @@
 <?php
-
-    session_start();
     require_once 'conn.php';
     
     if(isset($_POST['login'])){
@@ -33,7 +31,7 @@
                     if($email == $row['email']){
                         if(password_verify($password, $row['password'])){
                             $_SESSION['user_login'] = $row['user_id'];
-                            header("location: index.php");
+                            header("location: profile.php");
                         }else{
                             $_SESSION['error'] = 'Wrong password!';
                             header("location: login.php");
