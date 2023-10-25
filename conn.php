@@ -2,6 +2,7 @@
 session_start();
 
 function conndb(){
+  
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -15,6 +16,5 @@ try {
   echo "Connection failed: " . $e->getMessage();
 }
 }
-
 
 ?>

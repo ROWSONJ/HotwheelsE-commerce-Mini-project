@@ -1,7 +1,8 @@
 <?php 
+    require 'conn.php';
     require 'header.php'; 
     require 'menubar.php';
-    require_once 'conn.php';
+    
 
     if(!isset($_SESSION['user_login'])){
       //อย่าลืมทำalertให้เข้าสู่ระบบ
@@ -79,6 +80,7 @@
     <div class="col">
       <div class="profile">
         <?php
+        $conn = conndb();
         
         if(isset($_SESSION['user_login'])){
           $user_id = $_SESSION['user_login'];

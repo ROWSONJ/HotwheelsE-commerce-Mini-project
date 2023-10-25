@@ -15,7 +15,7 @@
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="assets\css\jstyle.css">
+  <link rel="stylesheet" href=".\assets\css\style.css">
   
   <!-- 
     - google font link

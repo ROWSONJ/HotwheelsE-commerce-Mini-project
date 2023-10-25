@@ -11,7 +11,7 @@ if (isset($_POST['carbrand'])) {
     $result = tablequery("SELECT p.*, c.category_name, b.carbrand_name FROM products p
         LEFT JOIN categories c ON p.category_id = c.category_id
         LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
-        WHERE b.carbrand_name = '$carbrandName' 
+        WHERE LEFT(b.carbrand_id, 2) = '$carbrandName' 
         AND (p.Release_Date IS NULL OR p.Release_Date <= CURDATE())
         ORDER BY p.Release_Date DESC");
 

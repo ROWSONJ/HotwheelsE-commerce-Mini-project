@@ -20,7 +20,7 @@
             header("location: login.php");
         } else{
             try{
-
+                $conn = conndb();
                 $check_data = $conn->prepare("SELECT * FROM users WHERE email = :email");
                 $check_data->bindParam(":email", $email);
                 $check_data->execute();

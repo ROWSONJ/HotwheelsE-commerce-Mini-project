@@ -116,22 +116,35 @@
               <button class="filter-btn active" data-carbrand="All">All</button>
           </li>
           
+
+          <!-- 
+            - #FILTER & DISPLAY first two letter of carbrand_id
+          -->
+
           <?php
-                    $result = tablequery('SELECT * FROM carbrands ORDER BY RAND() LIMIT 5');
-                    if ($result) {
-                      // Use foreach to iterate through the result set
-                      foreach ($result as $row)  { 
-                          echo '<li>
-                          <button class="filter-btn active" data-carbrand="' . $row['carbrand_name'] . '">' . $row['carbrand_name'] . '</button>
-                       </li>';                          
-                        }
-                    }else {
-                        echo "0 results";
-                    }// Close the connection
-                ?>
+$carbrands = [];
+$result = tablequery('SELECT DISTINCT SUBSTRING(carbrand_id, 1, 2) AS carbrand_text FROM carbrands');
+
+if ($result) {
+    foreach ($result as $row)  { 
+        $carbrand_text = $row['carbrand_text'];
+        echo '<li>
+            <button class="filter-btn active" data-carbrand="' . $carbrand_text . '">' . $carbrand_text . '</button>
+        </li>';
+    }
+} else {
+    echo "0 results";
+}
+?>
           </ul>
           
           <ul class="product-list" id="product-list">
+
+
+          <!-- 
+            - #LISTS OF PRODUCT
+          -->
+          
             <?php
           $result = tablequery('SELECT p.*, c.category_name, b.carbrand_name FROM products p
                 LEFT JOIN categories c ON p.category_id = c.category_id
@@ -222,13 +235,13 @@ echo "0 results";
           <ul class="cta-list">
 
             <li>
-              <div class="cta-card" style="background-image: url('./assets/images/cta-1.jpg')">
-                <p class="card-subtitle">Adidas Shoes</p>
+              <div class="cta-card" style="background-image: url('./assets/images/cta-1.webp')">
+                
+                <h3 class="h2 card-title">RACE YOUR WAY </h3>
 
-                <h3 class="h2 card-title">The Summer Sale Off 50%</h3>
-
+                <p class="card-subtitle">With so many exciting new challenges and crazy game modes</p>
                 <a href="#" class="btn btn-link">
-                  <span>Shop Now</span>
+                  <span>View</span>
 
                   <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
                 </a>
@@ -236,13 +249,12 @@ echo "0 results";
             </li>
 
             <li>
-              <div class="cta-card" style="background-image: url('./assets/images/cta-2.jpg')">
-                <p class="card-subtitle">Nike Shoes</p>
+              <div class="cta-card" style="background-image: url('./assets/images/cta-2.webp')">
+                <h3 class="h2 card-title">THE RACE CONTINUES</h3>
 
-                <h3 class="h2 card-title">Makes Yourself Keep Sporty</h3>
-
+                <p class="card-subtitle">Hot Wheels Unleashed 2 - Turbocharged</p>
                 <a href="#" class="btn btn-link">
-                  <span>Shop Now</span>
+                  <span>View</span>
 
                   <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
                 </a>
@@ -744,7 +756,7 @@ echo "0 results";
   <!-- 
     - custom js link
   -->
-  <script src="./assets/js/jscript.js"></script>
+  <script src="./assets/js/script.js"></script>
 
   <!-- 
     - ionicon link

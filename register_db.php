@@ -1,6 +1,6 @@
 <?php
 
-    session_start();
+
     require_once 'conn.php';
     
     if(isset($_POST['signup'])){
@@ -48,7 +48,7 @@
             header("location: register.php");
         } else{
             try{
-
+                $conn = conndb();
                 $check_email = $conn->prepare("SELECT email FROM users WHERE email = :email");
                 $check_email->bindParam(":email", $email);
                 $check_email->execute();

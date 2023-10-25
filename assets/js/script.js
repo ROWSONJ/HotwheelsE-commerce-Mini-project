@@ -6,6 +6,7 @@ $(document).ready(function () {
   $('.filter-btn').click(function () {
       // Get the selected carbrand_name from the data attribute
       var carbrandName = $(this).data('carbrand');
+      console.log('carbrandName:', carbrandName);
 
       if (carbrandName === 'All') {
           // If "All" is selected, clear the filter and display the default product list

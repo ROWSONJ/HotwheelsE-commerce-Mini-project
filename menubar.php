@@ -39,13 +39,16 @@
           </li>
 
           <li class="navbar-item">
-            <a href="#" class="navbar-link">About</a>
+            <a href="profile.php" class="navbar-link">About</a>
           </li>
 
           <li class="navbar-item">
             <a href="#" class="navbar-link">Contact</a>
           </li>
 
+          <li class="navbar-item">
+            <a href="test.php" class="navbar-link">Test</a>
+          </li>
         </ul>
 
         <ul class="nav-action-list">
@@ -67,7 +70,7 @@
           </li>
 
           <li>
-            <a href="test.php" class="nav-action-btn">
+            <a href="#" class="nav-action-btn">
               <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
               <span class="nav-action-text">Wishlist</span>

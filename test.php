@@ -4,35 +4,36 @@ require 'header.php';
 require 'menubar.php';
 require 'func.php';
 ?>
-<?php
+
+<section class="section product">
+        <div class="container">
+
+          <h2 class="h2 section-title">Hot Wheels Products</h2>
+
+          <ul class="filter-list">
+
+          <li>
+              <button class="filter-btn active" data-carbrand="All">All</button>
+          </li>
+          <?php
+$carbrands = [];
+$result = tablequery('SELECT DISTINCT SUBSTRING(carbrand_id, 1, 2) AS carbrand_text FROM carbrands');
+
 if ($result) {
-    // Use foreach to iterate through the result set
-    foreach ($result as $row) {
-        $isNewProduct = false;
-        $releaseDate = strtotime($row['Release_Date']);
-        $currentDate = strtotime('now');
-
-        // Check if the product is new (released within the last week)
-        if (!empty($row['Release_Date']) && $releaseDate <= $currentDate) {
-            $isNewProduct = true;
-        }
-
-        // Only display the product if it's not a future release
-        if (!$isNewProduct) {
-            continue; // Skip this product
-        }
-
-        // The rest of your code to display the product
-        echo '<li class="product-item" data-is-new="' . json_encode($isNewProduct) . '">
-        <div class="product-card" tabindex="0">
-            <!-- ... (your product card code here) ... -->
-        </div>
+    foreach ($result as $row)  { 
+        $carbrand_text = $row['carbrand_text'];
+        echo '<li>
+            <button class="filter-btn active" data-carbrand="' . $carbrand_text . '">' . $carbrand_text . '</button>
         </li>';
     }
 } else {
     echo "0 results";
 }
+// Close the connection
 ?>
+
+</ul>
+
 
 <?php 
 require 'footer.php';
