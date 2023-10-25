@@ -1,13 +1,12 @@
 <!-- 
     - #HEADER
   -->
-
   <header class="header" data-header>
     <div class="container">
 
       <div class="overlay" data-overlay></div>
 
-      <a href="#" class="logo">
+      <a href="index.php" class="logo">
         <img src="./assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
       </a>
 
@@ -22,17 +21,13 @@
         </button>
 
         <a href="#" class="logo">
-          <img src="./assets/images/logo.svg" width="190" height="50" alt="Footcap logo">
+          <img src="./assets/images/fastlanelogo.svg" width="190" height="50" alt="FastLane logo">
         </a>
 
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <a href="#" class="navbar-link">Home</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#" class="navbar-link">Hot Wheels</a>
+            <a href="index.php" class="navbar-link">Home</a>
           </li>
 
           <li class="navbar-item">

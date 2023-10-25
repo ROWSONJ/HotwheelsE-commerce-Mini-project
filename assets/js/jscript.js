@@ -1,3 +1,6 @@
+/**
+ * *  Filter products in index.php
+*/
 $(document).ready(function () {
   // Add a click event listener to the filter buttons
   $('.filter-btn').click(function () {
@@ -37,6 +40,29 @@ $(document).ready(function () {
           }
       });
   }
+});
+
+/**
+ * Display products based on release date
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
+  var productItems = document.querySelectorAll('.product-item');
+  var currentDate = new Date(); // Get the current date
+
+  productItems.forEach(function (productItem) {
+    var releaseDateStr = productItem.getAttribute('release-date');
+    
+    // Convert releaseDateStr to a Date object
+    var releaseDate = new Date(releaseDateStr);
+console.log(releaseDate);
+console.log(currentDate);
+    if (currentDate >= releaseDate) {
+      productItem.style.display = 'block';
+    } else {
+      productItem.style.display = 'none';
+    }
+  });
 });
 
 
@@ -80,3 +106,10 @@ window.addEventListener("scroll", function () {
     goTopBtn.classList.remove("active");
   }
 });
+
+
+
+
+
+
+
