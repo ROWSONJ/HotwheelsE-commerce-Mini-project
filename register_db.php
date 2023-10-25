@@ -14,37 +14,37 @@
         $address = $_POST['address'];
 
         if(empty($firstname)){
-            $_SESSION['error'] = 'กรุณากรอกชื่อ';
+            $_SESSION['error'] = 'Please enter your first name';
             header("location: register.php");
         }else if(empty($lastname)){
-            $_SESSION['error'] = 'กรุณากรอกนามสกุล';
+            $_SESSION['error'] = 'Please enter your last name';
             header("location: register.php");
         }else if(empty($username)){
-            $_SESSION['error'] = 'กรุณากรอกชื่อบัญชี';
+            $_SESSION['error'] = 'Please enter your username';
             header("location: register.php");
         }else if(empty($email)){
-            $_SESSION['error'] = 'กรุณากรอกอีเมล';
+            $_SESSION['error'] = 'Please enter your email';
             header("location: register.php");
         }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $_SESSION['error'] = 'รูปแบบอีเมลไม่ถูกต้อง';
+            $_SESSION['error'] = 'Please enter a valid email address';
             header("location: register.php");
         }else if(empty($password)){
-            $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
+            $_SESSION['error'] = 'Please enter your password';
             header("location: register.php");
         }else if(strlen($_POST['password'])>20 || strlen($_POST['password']) <6 ){
             $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 6 ถึง 20 ตัวอักษร';
             header("location: register.php");
         }else if(empty($c_password)){
-            $_SESSION['error'] = 'กรุณายืนยันรหัสผ่าน';
+            $_SESSION['error'] = 'Please confirm your password';
             header("location: register.php");
         }else if($password != $c_password){
             $_SESSION['error'] = 'รหัสผ่านไม่ตรงกัน';
             header("location: register.php");
         }else if(empty($dob)){
-            $_SESSION['error'] = 'กรุณากรอกวันเกิด';
+            $_SESSION['error'] = 'Please enter your birthday';
             header("location: register.php");
         }else if(empty($address)){
-            $_SESSION['error'] = 'กรุณากรอกที่อยู่';
+            $_SESSION['error'] = 'Please enter your address';
             header("location: register.php");
         } else{
             try{
@@ -55,7 +55,7 @@
                 $row = $check_email->fetch(PDO::FETCH_ASSOC);
 
                 if($row['email'] == $email){
-                    $_SESSION['warning'] = 'มีอีเมลนี้อยู่ในระบบแล้ว <a href="login.php">login</a>';
+                    $_SESSION['warning'] = 'Email already exist. <a href="login.php">login</a>';
                     header("location: register.php");
                 }else if (!isset($_SESSION['error'])){
                     

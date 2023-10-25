@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'conn.php';
 ?>
 
@@ -17,7 +16,7 @@ require 'conn.php';
 <div class="container ">
     <form action="register_db.php" method="post">
         <div class="forms" >
-            <div class="form login">
+            <div class="form login"  >
             <span class="title">Registration</span>
                 <?php if(isset($_SESSION['error'])){?>
                     <label>
@@ -78,7 +77,7 @@ require 'conn.php';
                         <i class="uil uil-lock icon"></i>
                     </div>
                     <div class="input-field button">
-                        <input type="button" value="Next" name="signup" class="text signup-link"> 
+                        <input type="button" value="Next" name="Next" class="text signup-link"> 
                     </div>
                     <div class="login-signup">
                             <span class="text">Already registered? <a href="login.php" class="text signup-link">Login</a></span>
@@ -87,9 +86,9 @@ require 'conn.php';
 
 
 
-            <div class="form signup">
+            <div class="form signup" style="height:105%;">
             <span class="title">Registration</span>
-                    <div class="input-field">
+                    <div class="input-field" style="margin-top:10px">
                         <input type="text" name="firstname" placeholder="Enter your first name" required>
                         <i class="uil uil-user"></i>
                     </div>
@@ -108,9 +107,10 @@ require 'conn.php';
                     <div class="input-field">
                         <input type="text" name="address" placeholder="Enter your address" required>
                         <i class="uil uil-at"></i>
-                    </div>                
-                    <div class="input-field button">
-                            <input type="submit" value="Signup" id="signup" name="signup">
+                    </div>   
+                    <div class="input-field button" >
+                        <input type="button" value="Previous" name="previous" class="text login-link">
+                        <input type="submit" value="Signup" id="signup" name="signup" style="margin-top: 60px;">
                     </div>
               
             </div>

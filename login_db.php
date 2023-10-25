@@ -1,6 +1,4 @@
 <?php
-
-    session_start();
     require_once 'conn.php';
     
     if(isset($_POST['login'])){
@@ -9,13 +7,13 @@
         $password = $_POST['password'];
 
         if(empty($email)){
-            $_SESSION['error'] = 'กรุณากรอกอีเมล';
+            $_SESSION['error'] = 'Please enter your email';
             header("location: login.php");
         }else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $_SESSION['error'] = 'รูปแบบอีเมลไม่ถูกต้อง';
+            $_SESSION['error'] = 'Please enter a valid email address';
             header("location: login.php");
         }else if(empty($password)){
-            $_SESSION['error'] = 'กรุณากรอกรหัสผ่าน';
+            $_SESSION['error'] = 'Please enter your password';
             header("location: login.php");
         }else if(strlen($_POST['password'])>20 || strlen($_POST['password']) <6 ){
             $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 6 ถึง 20 ตัวอักษร';
@@ -29,11 +27,11 @@
                 $row = $check_data->fetch(PDO::FETCH_ASSOC);
 
                 if($check_data->rowCount() > 0){
-                    
+
                     if($email == $row['email']){
                         if(password_verify($password, $row['password'])){
                             $_SESSION['user_login'] = $row['user_id'];
-                            header("location: index.php");
+                            header("location: profile.php");
                         }else{
                             $_SESSION['error'] = 'Wrong password!';
                             header("location: login.php");
