@@ -80,11 +80,13 @@
     <div class="col">
       <div class="profile">
         <?php
-        $conn = conndb();
         
         if(isset($_SESSION['user_login'])){
+          $conn = conndb();
           $user_id = $_SESSION['user_login'];
-          $stmt = $conn->query("SELECT * users WHERE user_id = $user_id");
+
+          $stmt = $conn->query("SELECT * from users WHERE user_id = '$user_id'");
+
           $stmt->execute();
           $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
