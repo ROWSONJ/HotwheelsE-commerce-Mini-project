@@ -3,13 +3,13 @@
   -->
 
   <footer class="footer">
-
+  <link rel="stylesheet" href="..\assets\css\style.css">
     <div class="footer-top section">
       <div class="container">
         <div class="footer-brand">
 
           <a href="#" class="logo">
-            <img src="./assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
+            <img src="../assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
           </a>
 
           <ul class="social-list">
@@ -39,7 +39,7 @@
             </li>
 
           </ul>
-                </div>
+                </div><hr>
             </div>
         </div>
 
@@ -185,9 +185,8 @@
       <div class="container">
 
       <p class="copyright">
-        &copy; <script>document.write(new Date().getFullYear())</script> <a href="#" class="copyright-link">FAST LANE</a>. All Rights Reserved
+    &copy; <span id="currentRightYear"></span> <a href="#" class="copyright-link">FAST LANE</a><span>. All Rights Reserved</span>
 </p>
-
 
 
       </div>

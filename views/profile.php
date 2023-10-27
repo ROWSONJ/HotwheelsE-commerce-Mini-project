@@ -1,7 +1,7 @@
 <?php 
-    require 'conn.php';
-    require 'header.php'; 
-    require 'menubar.php';
+    require '../global/conn.php';
+    require '../global/header.php'; 
+    require '../global/menubar.php';
     
 
     if(!isset($_SESSION['user_login'])){
@@ -92,7 +92,7 @@
 
         }
         ?>
-        <img src="tumblr_b006d16d4b0d4a213d0ad2b818e6e6b8_3df43155_540.jpg" alt="">
+        <img src="../assets/images/tumblr_b006d16d4b0d4a213d0ad2b818e6e6b8_3df43155_540.jpg" alt="">
         
         <h2> <?php echo $row['username']?></h2>
 
@@ -120,7 +120,11 @@
 </div>
 
 
-
+ <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
 

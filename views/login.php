@@ -1,6 +1,5 @@
 <?php
-session_start();
-
+ require '../global/conn.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="assets\css\main.css">
+    <link rel="stylesheet" href="..\assets\css\main.css">
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
 </head>
 <body>

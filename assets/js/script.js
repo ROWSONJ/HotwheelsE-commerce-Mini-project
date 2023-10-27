@@ -53,11 +53,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   productItems.forEach(function (productItem) {
     var releaseDateStr = productItem.getAttribute('release-date');
-    
+
     // Convert releaseDateStr to a Date object
     var releaseDate = new Date(releaseDateStr);
-console.log(releaseDate);
-console.log(currentDate);
+
+    console.log("This is releaseDate: ", releaseDate);
+
+    // Subtract 30 minutes from the releaseDate
+    releaseDate.setMinutes(releaseDate.getMinutes() + 30);
+
+    console.log("This is releaseDate + 30: ", releaseDate);
+    console.log("This is currentDate: ", currentDate);
     if (currentDate >= releaseDate) {
       productItem.style.display = 'block';
     } else {
@@ -66,6 +72,11 @@ console.log(currentDate);
   });
 });
 
+/**
+ * COPYRIGHT
+ *  */
+document.getElementById("currentRightYear").textContent = new Date().getFullYear();
+console.log(textContent);
 
 'use strict';
 

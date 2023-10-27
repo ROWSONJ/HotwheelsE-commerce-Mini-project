@@ -10,12 +10,12 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="./assets/images/web_logo.svg" type="image/svg+xml">
+  <link rel="shortcut icon" href="../assets/images/web_logo.svg" type="image/svg+xml">
 
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href=".\assets\css\style.css">
+  <link rel="stylesheet" href="..\assets\css\style.css">
   
   <!-- 
     - google font link
@@ -27,16 +27,16 @@
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Noto Sans Thai' rel='stylesheet'>
   <!-- 
     - preload banner
   -->
-  <link rel="preload" href="./assets/images/hotwheels-banner02.png" as="image">
+  <link rel="preload" href="../assets/images/hotwheels-banner02.png" as="image">
 
   <!-- 
     - Jqurey CDN & custom js link
   -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="./assets/js/script.js"></script>
   
   <!-- 
     - bootstrap CDN

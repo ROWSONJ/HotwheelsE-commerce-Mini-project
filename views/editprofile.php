@@ -1,6 +1,6 @@
 <?php 
-    require 'header.php'; 
-    require 'menubar.php';
+    require '../global/header.php'; 
+    require '../global/menubar.php';
 
     require 'conn.php';
     $sql = "SELECT * FROM users";

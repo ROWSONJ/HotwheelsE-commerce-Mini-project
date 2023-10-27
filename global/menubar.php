@@ -7,7 +7,7 @@
       <div class="overlay" data-overlay></div>
 
       <a href="index.php" class="logo">
-        <img src="./assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
+        <img src="../assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
       </a>
 
       <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
@@ -21,7 +21,7 @@
         </button>
 
         <a href="#" class="logo">
-          <img src="./assets/images/fastlanelogo.svg" width="190" height="50" alt="FastLane logo">
+          <img src="../assets/images/fastlanelogo.svg" width="190" height="50" alt="FastLane logo">
         </a>
 
         <ul class="navbar-list">
@@ -47,7 +47,7 @@
           </li>
 
           <li class="navbar-item">
-            <a href="test.php" class="navbar-link">Test</a>
+            <a href="../global/test.php" class="navbar-link">Test</a>
           </li>
         </ul>
 

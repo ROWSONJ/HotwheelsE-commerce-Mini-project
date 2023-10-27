@@ -1,8 +1,8 @@
 <?php
 // Include your database connection and tablequery function here
-require 'conn.php';
-require 'func.php';
-require 'header.php';
+require '../global/conn.php';
+require '../global/func.php';
+require '../global/header.php';
 
 if (isset($_POST['carbrand'])) {
     $carbrandName = $_POST['carbrand'];
@@ -13,7 +13,7 @@ if (isset($_POST['carbrand'])) {
         LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
         WHERE LEFT(b.carbrand_id, 2) = '$carbrandName' 
         AND (p.Release_Date IS NULL OR p.Release_Date <= CURDATE())
-        ORDER BY p.Release_Date DESC");
+        ORDER BY p.Release_Date DESC limit 8");
 
     if ($result) {
         if ($result->rowCount() > 0) {
