@@ -1,5 +1,5 @@
 <?php
-    include_once('conn.php');
+    include_once('../global/conn.php');
 
     function tablequery($table){   
     $conn = conndb();
@@ -9,6 +9,6 @@
         die("Error : ". $conn->$conn_error);
     }
     return $result;
+    var_dump($result);
     }
-    
 ?>

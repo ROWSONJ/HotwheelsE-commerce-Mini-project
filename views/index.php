@@ -87,10 +87,10 @@
                       <p class="hero-text">
                         ' . $row['bannerlist_infoL2'] . '
                       </p>
-                      <button class="btn btn-primary">
+                      <a href="../views/products_view.php?product_id=' . $row['product_id'] . '"><button class="btn btn-primary">
                         <span>Shop Now</span>
                         <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                      </button>
+                      </button></a>
                     </div>
                   </div>';
           }
@@ -147,34 +147,32 @@ if ($result) {
           
             <?php
           $result = tablequery('SELECT p.*, c.category_name, b.carbrand_name FROM products p
-                LEFT JOIN categories c ON p.category_id = c.category_id
-                LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
-                ORDER BY p.Release_Date DESC limit 8');
-        
-
-        if ($result) {
+          LEFT JOIN categories c ON p.category_id = c.category_id
+          LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
+          ORDER BY p.Release_Date DESC limit 8');
+      
+      if ($result) {
           // Use foreach to iterate through the result set
-          foreach ($result as $row) { 
-            $isNewProduct = false; // Initialize a flag for checking if the product is new
-
-      // Check if the product is new (released within the last week)
-      if (!empty($row['Release_Date'])) {
-      $releaseDate = strtotime($row['Release_Date']);
-      $oneWeekAgo = strtotime('-1 week');
-      if ($releaseDate > $oneWeekAgo) {
-      $isNewProduct = true;
-          }
-      }  
-      echo '<li class="product-item" release-date="'. $row['Release_Date'] .'">
-      <div class="product-card" tabindex="0">
-          <figure class="card-banner">
-              <img src="../assets/images/' . $row['p_image'] . '" width="312" height="350" loading="lazy"
-                  alt="' . $row['product_name'] . '" class="image-contain">';
-
-  // Display the "New" badge if it's a new product
-  if ($isNewProduct) {
-      echo '<div class="card-badge">New</div>';
-  }
+          foreach ($result as $row) {
+              $isNewProduct = false;
+      
+              if (!empty($row['Release_Date'])) {
+                  $releaseDate = strtotime($row['Release_Date']);
+                  $oneWeekAgo = strtotime('-1 week');
+                  if ($releaseDate > $oneWeekAgo) {
+                      $isNewProduct = true;
+                  }
+              }
+      
+              echo '<li class="product-item" release-date="' . $row['Release_Date'] . '">
+                  <div class="product-card" tabindex="0">
+                      <figure class="card-banner">
+                          <a class="image-contain" href="../views/products_view.php?product_id=' . $row['product_id'] . '"><img src="../assets/images/' . $row['p_image'] . '" width="312" height="350" loading="lazy"
+                          alt="' . $row['product_name'] . '" class=""></a>';
+      
+              if ($isNewProduct) {
+                  echo '<div class="card-badge">New</div>';
+              }
 
   echo '
               <ul class="card-action-list">
@@ -317,14 +315,12 @@ echo "0 results";
                     echo '<li class="product-item" release-date="'. $row['Release_Date'] .'">
                         <div class="product-card" tabindex="0">
                             <figure class="card-banner">
-                                <img src="../assets/images/'.$row['p_image'].'" width="312" height="350" loading="lazy"
-                                    alt="'.$row['product_name'].'" class="image-contain">';
+                            <a class="image-contain" href="../views/products_view.php?product_id=' . $row['product_id'] . '"><img src="../assets/images/' . $row['p_image'] . '" width="312" height="350" loading="lazy"
+                            alt="' . $row['product_name'] . '" class="image-contain"></a>';
                 if ($isNewProduct) {
                 echo '<div class="card-badge">New</div>';
                 }  
-                       echo '
-                                <div class="card-badge">New</div>
-                
+                       echo '               
                                 <ul class="card-action-list">
                 
                                     <li class="card-action-item">

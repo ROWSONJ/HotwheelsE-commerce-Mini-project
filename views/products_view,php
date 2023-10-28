@@ -1,6 +1,0 @@
-<?php
-    require '../global/conn.php';
-    require '../glabal/header.php';
-    require '../global/meunbar.php';
-    require '../global/func.php';
-?>

@@ -25,6 +25,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link href="https://fonts.googleapis.com/css2?family=FAMILY_NAME:wght@WEIGHT_OR_RANGE&display=swap" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
   <link href='https://fonts.googleapis.com/css?family=Noto Sans Thai' rel='stylesheet'>
@@ -32,6 +33,11 @@
     - preload banner
   -->
   <link rel="preload" href="../assets/images/hotwheels-banner02.png" as="image">
+
+  <!-- 
+    - fontawesome icon CDN
+  -->
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
   <!-- 
     - Jqurey CDN & custom js link

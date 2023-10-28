@@ -6,7 +6,7 @@
 
       <div class="overlay" data-overlay></div>
 
-      <a href="index.php" class="logo">
+      <a href="../views/index.php" class="logo">
         <img src="../assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
       </a>
 
@@ -27,7 +27,7 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <a href="index.php" class="navbar-link">Home</a>
+            <a href="../views/index.php" class="navbar-link">Home</a>
           </li>
 
           <li class="navbar-item">

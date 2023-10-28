@@ -3,7 +3,7 @@
   -->
 
   <footer class="footer">
-  <link rel="stylesheet" href="..\assets\css\style.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
     <div class="footer-top section">
       <div class="container">
         <div class="footer-brand">
@@ -39,7 +39,8 @@
             </li>
 
           </ul>
-                </div><hr>
+                </div>
+                <hr class="hr-style">
             </div>
         </div>
 

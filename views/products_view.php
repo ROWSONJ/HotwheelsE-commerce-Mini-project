@@ -1,4 +1,5 @@
 <?php
+ob_start(); 
 if (!isset($_GET['product_id'])) {
   header("refresh: 10; http://localhost/mini-project-yrs3/mini-project/views/404.php");
   exit; // Exit to prevent further code execution
@@ -34,7 +35,7 @@ if ($result) {
   // Handle any database query errors
   echo "Database error: " . $conn->error;
 }
-
+ob_end_flush();
 ?>
 
 <main>
@@ -48,7 +49,7 @@ if ($result) {
                 <div class="product-info">
                   <div class="product name">
                     <h1 class="product-name"><?=$row['product_name']?></h1>
-                    <p class="prod-name"><?=$row['category_name']?>/<?=$row['carbrand_name']?></p>
+                    <p class="prod-name"><?=$row['category_name']?> | <?=$row['carbrand_name']?></p>
               </div>
               <hr class="hr-product">
 
@@ -125,7 +126,8 @@ if ($result) {
                         </div>
                     </div>
                     </div>
-
+                    <hr class="hr-product">
+                    
                     <div class="product-action">
                         <button class="sell-btn" type="button">Sell</button> 
                         <button class="add-to-cart-btn">
@@ -186,8 +188,9 @@ if ($result) {
                     echo '<li class="product-item" release-date="'. $row['Release_Date'] .'">
                         <div class="product-card" tabindex="0">
                             <figure class="card-banner">
-                            <a class="image-contain" href="../views/products_view.php?product_id="'.$row["product_id"].'"><img src="../assets/images/'.$row['p_image'].'" width="312" height="350" loading="lazy"
-                                    alt="'.$row['product_name'].'" class=""></a>';
+                            <a class="image-contain" href="' . $_SERVER['PHP_SELF'] . '?product_id=' . $row['product_id'] . '"><img src="../assets/images/' . $row['p_image'] . '" width="312" height="350" loading="lazy"
+                                    alt="' . $row['product_name'] . '" class="image-contain"></a>';
+
               if($isNewProduct){
                 echo '<div class="card-badge">New</div>';
               }  
