@@ -32,7 +32,7 @@
             $_SESSION['error'] = 'Please enter your password';
             header("location: register.php");
         }else if(strlen($_POST['password'])>20 || strlen($_POST['password']) <6 ){
-            $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวระหว่าง 6 ถึง 20 ตัวอักษร';
+            $_SESSION['error'] = 'Your password must be 6-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.';
             header("location: register.php");
         }else if(empty($c_password)){
             $_SESSION['error'] = 'Please confirm your password';
