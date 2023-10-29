@@ -1,8 +1,7 @@
 <?php 
-    require 'conn.php';
-    require 'header.php'; 
-    require 'menubar.php';
-    
+    require '../global/conn.php';
+    require '../global/header.php'; 
+    require '../global/menubar.php';
 
     if(!isset($_SESSION['user_login'])){
       //อย่าลืมทำalertให้เข้าสู่ระบบ

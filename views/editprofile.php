@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
 <?php
-require_once 'conn.php';
+require_once '../global/conn.php';
 
 if (isset($_POST['editprofile'])) {
     $firstname = $_POST['firstname'];
