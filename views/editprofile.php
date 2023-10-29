@@ -32,13 +32,13 @@ if (isset($_POST['editprofile'])) {
                     $user_id = $_SESSION['user_login'];
 
             
-                    $stmt = $conn->prepare("UPDATE `users` SET username=:username_up, email=:email_up, first_name=:firstname_up, last_name=:lastname_up, date_of_birth=:dob_up, address=:address_up, user_image=:newname WHERE user_id=:user_id");
-                    $stmt->bindParam(":firstname_up", $firstname);
-                    $stmt->bindParam(":lastname_up", $lastname);
-                    $stmt->bindParam(":username_up", $username);
-                    $stmt->bindParam(":email_up", $email);
-                    $stmt->bindParam(":dob_up", $dob);
-                    $stmt->bindParam(":address_up", $address);
+                    $stmt = $conn->prepare("UPDATE `users` SET username=:username, email=:email, first_name=:firstname, last_name=:lastname, date_of_birth=:dob_up, address=:address_up, user_image=:newname WHERE user_id=:user_id");
+                    $stmt->bindParam(":firstname", $firstname);
+                    $stmt->bindParam(":lastname", $lastname);
+                    $stmt->bindParam(":username", $username);
+                    $stmt->bindParam(":email", $email);
+                    $stmt->bindParam(":dob", $dob);
+                    $stmt->bindParam(":address", $address);
                     $stmt->bindParam(":newname", $newname);  
                     $stmt->bindParam(":user_id", $user_id);
 
@@ -52,8 +52,7 @@ if (isset($_POST['editprofile'])) {
                                     title: "Update Success",
                                     type: "success"
                                 }, function() {
-                                    window.location = "profile.php"; //หน้าที่ต้องการให้กระโดดไป
-                                });
+                                    window.location = "profile.php"; 
                                 }, 1000);
                             </script>';
                         } else {
@@ -63,7 +62,7 @@ if (isset($_POST['editprofile'])) {
                                     title: "Error!",
                                     type: "error"
                                 }, function() {
-                                    window.location = "profile.php"; //หน้าที่ต้องการให้กระโดดไป
+                                    window.location = "profile.php"; 
                                 });
                                 }, 1000);
                             </script>';
@@ -76,7 +75,7 @@ if (isset($_POST['editprofile'])) {
                         title: "File not correct",
                         type: "error"
                     }, function() {
-                        window.location = "profile.php"; //หน้าที่ต้องการให้กระโดดไป
+                        window.location = "profile.php"; 
                     });
                     }, 1000);
                     </script>';

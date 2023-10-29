@@ -174,7 +174,7 @@
       </div>
       <div class=" mb-3">
         <label for="formFile" class="form-label">Username</label>
-        <input type="text" class="form-control" value=" <?php echo $row['username']?>"  name="username" aria-label="username" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" value=" <?php echo $row['username']?>"  name="username" >
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">First name & Last name</label>
