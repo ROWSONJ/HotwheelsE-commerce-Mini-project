@@ -1,0 +1,325 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: block;
+    font-family: Noto Sans Thai,sans-serif;
+}
+
+.p{
+    margin: 0px;
+    line-height: 1.43;
+    font-size: 14px;
+}
+
+
+.h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.4em;
+    font-weight: bold;
+}
+
+.h2,
+.h3,
+.h4{
+    margin: 0;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.43;
+    color: #1b1b1b;
+}
+
+.hr-product {
+    margin: 0px;
+    flex-shrink: 0;
+    border-width: 0px 0px thin;
+    border-style: solid;
+    border-color: rgb(233, 233, 233);
+}
+
+.sectionp {
+    padding: 40px 0;
+    width: 100%;
+}
+
+.product-view{
+    margin-inline: 34.4px;
+    padding-inline: 24px;
+    margin-left: auto;
+    box-sizing: border-box;
+    margin-right: auto;
+    display: flex; 
+    justify-content: space-between;
+    padding-left: 16px; 
+    padding-right: 16px;
+}
+
+.product-info {
+    padding-left: 24px;
+    padding-top: 24px;
+    width: 50%;
+}
+
+.product-image {
+    width: 50%;
+    padding-left: 24px;
+    padding-top: 24px;
+    display: flex;
+    justify-content: left; /* Center horizontally */
+    align-items: flex-start; /* Center vertically */
+    flex-basis: 50%;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    max-width: 50%;
+}
+
+.product-image   img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.product {
+    padding: 1rem;
+}
+
+.product-name{
+    font-weight: 500;
+    font-size: 1.9rem;;
+    line-height: 1.75rem;
+    padding-bottom: 8px;
+}
+
+.product-price {
+    display: flex;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    align-items: center;
+    padding-top: 0.6em;
+    padding-bottom: 8px;
+}
+
+.prod-name {
+    margin: 0px 0px 0.35em;
+    color: rgb(150, 150, 150);
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: uppercase;
+    display: block;
+}
+
+.price-1 {
+    margin: 0px 0px 0.35em;
+    color: rgb(150, 150, 150);
+    font-weight: 500;
+    font-size: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.price-2 {
+    color: rgb(27, 27, 27);
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+}
+
+.tag-head {
+    margin: 0px 0px 0.35em;
+    color: rgb(27, 27, 27);
+    font-weight: 500;
+    padding-bottom: 8px;
+}
+
+.icon-img {
+        filter: brightness(0) invert(1);
+        width: 70%;
+        height: auto;
+}
+
+.tag-icon {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0px auto;
+}
+
+.tag-icon-img {
+    background: #000;
+    width: 13%;
+    min-width: 35px;
+    height: 30px;
+    border: 0.5px solid #000;
+    border-radius: 30%;
+    display: grid;
+    place-items: center;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 30px;
+    padding-inline: 30px;
+}
+
+.tag-discription{
+    margin: 8px 0px 0px;
+    font-weight: 400;
+    color: rgb(90, 90, 90);
+    font-size: 12px;
+}
+
+.product-logis {
+    display: flex;
+    flex-direction: column;
+    padding-top: 11px;
+}
+
+.logis-head{
+    color: rgb(27, 27, 27);
+    font-weight: 500;
+}
+
+.logis-item{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.logis-type{
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+}
+
+.logis-name{
+    color: rgb(90, 90, 90);
+    font-weight: 500;
+}
+
+.logis-detail{
+    margin: 8px 0px 0px;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgb(150, 150, 150);
+}
+
+.logis_alert{
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 16px 16px;
+}
+
+.logis-alert-detail{
+    display: flex;
+    flex-direction: row;
+    margin-top: 8px;
+}
+
+.span{
+    margin: 0px 0px 0px 8px;
+    font-size: 12px;
+    font-weight: 300;
+    font-family: Inter, sans-serif;
+    line-height: 2;
+    color: rgb(211, 47, 47);
+}
+
+.product-quantity {
+    margin-bottom: 10px;
+}
+
+.product-quantity-title {
+    color: rgb(27, 27, 27);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.product-quantity-container {
+    display: flex;
+    align-items: center;
+}
+
+.product-quantity-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.product-quantity-input {
+    width: 60px;
+    height: 40px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    text-align: center;
+}
+
+.product-action {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
+}
+
+.sell-btn {
+    width: 200px;
+    height: 50px;
+    border: #000 1px solid;
+    color: #000;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-to-cart-btn {
+    width: 200px;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sell-btn:hover {
+    border: #FE6F5E 1px solid;
+    color: #FE6F5E;
+}
+
+.add-to-cart-btn:hover {
+    color: #000;
+    background-color: #00aa00;
+}
+
+/* Hover effect for the product image */
+.product-image img:hover {
+    opacity: 0.8;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  color: #00aa00
+}
+
+@media (min-width: 1200px){
+    .product-view {
+        max-width: 1200px;
+    }
+}
+ 
+/*
+    BUTTON
+*/
