@@ -41,17 +41,17 @@ body{
     transition: margin-left 0.18s ease;
 }
 
-.container.active .login{
+.container.active .signup{
     margin-left: -50%;
     opacity: 0;
     transition: margin-left 0.18s ease, opacity 0.15s ease;
 }
 
-.container .signup{
+.container .signupcon{
     opacity: 0;
     transition: opacity 0.09s ease;
 }
-.container.active .signup{
+.container.active .signupcon{
     opacity: 1;
     transition: opacity 0.2s ease;
 }
@@ -172,7 +172,7 @@ body{
     background-color: #265df2;
 }
 
-.form .login-signup{
+.form .signup-signupcon{
     margin-top: 30px;
     text-align: center;
 }

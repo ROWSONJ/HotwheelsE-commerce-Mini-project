@@ -224,7 +224,8 @@
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" value=" <?php echo $row['email']?>" name="email">
+        <input class="form-control" type="email" value="<?php echo $row['email']?>" name="email" aria-label="readonly input example" readonly>
+        
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">Date Of Birth</label>

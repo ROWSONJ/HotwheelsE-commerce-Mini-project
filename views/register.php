@@ -16,7 +16,7 @@ require '../global/conn.php';
 <div class="container ">
     <form action="register_db.php" method="post">
         <div class="forms" >
-            <div class="form login"  >
+            <div class="form signup"  >
             <span class="title">Registration</span>
                 <?php if(isset($_SESSION['error'])){?>
                     <label>
@@ -77,16 +77,16 @@ require '../global/conn.php';
                         <i class="uil uil-lock icon"></i>
                     </div>
                     <div class="input-field button">
-                        <input type="button" value="Next" name="Next" class="text signup-link"> 
+                        <input type="button" value="Next" name="Next" class="text signupcon-link"> 
                     </div>
-                    <div class="login-signup">
-                            <span class="text">Already registered? <a href="../views/login.php" class="text signup-link">Login</a></span>
+                    <div class="signup-signupcon">
+                            <span class="text">Already registered? <a href="../views/login.php" >Login</a></span>
                     </div>
             </div>
 
 
 
-            <div class="form signup" style="height:105%;">
+            <div class="form signupcon" style="height:105%;">
             <span class="title">Registration</span>
                     <div class="input-field" style="margin-top:10px">
                         <input type="text" name="firstname" placeholder="Enter your first name" required>
@@ -109,7 +109,7 @@ require '../global/conn.php';
                         <i class="uil uil-at"></i>
                     </div>   
                     <div class="input-field button" >
-                        <input type="button" value="Previous" name="previous" class="text login-link">
+                        <input type="button" value="Previous" name="previous" class="text signup-link">
                         <input type="submit" value="Signup" id="signup" name="signup" style="margin-top: 60px;">
                     </div>
               
@@ -122,8 +122,8 @@ require '../global/conn.php';
 const container = document.querySelector(".container"),
 pwShowHide = document.querySelectorAll(".showHidePw"),
 pwFields = document.querySelectorAll(".password"),
-signUp = document.querySelector(".signup-link"),
-login = document.querySelector(".login-link");
+signUpCon = document.querySelector(".signupcon-link"),
+signup = document.querySelector(".signup-link");
 
 // js code to show/hide password and change icon
 pwShowHide.forEach(eyeIcon => {
@@ -144,10 +144,10 @@ pwShowHide.forEach(eyeIcon => {
     });});});
 
 // js code to appear signup and login form
-signUp.addEventListener("click", () => {
+signUpCon.addEventListener("click", () => {
   container.classList.add("active");
 });
-login.addEventListener("click", () => {
+signUp.addEventListener("click", () => {
   container.classList.remove("active");
 });
 
