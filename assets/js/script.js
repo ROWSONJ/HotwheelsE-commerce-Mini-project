@@ -1,3 +1,4 @@
+
 /**
  * *  Filter products in index.php
 */
@@ -171,10 +172,8 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-
-
-
 // Other JavaScript functions and logic here
+
 
 
 /**

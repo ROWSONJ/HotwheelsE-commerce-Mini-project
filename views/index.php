@@ -28,12 +28,12 @@
             existing an
             expanded array of leadership.
           </p>-->
-
+          <a href="allproduct.php" class="">
           <button class="btn btn-primary">
             <span>Shop Now</span>
 
             <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-          </button>
+          </button></a>
 
         </div>
       </section>
