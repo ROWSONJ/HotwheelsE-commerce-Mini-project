@@ -22,7 +22,7 @@ if (isset($_POST['editprofile'])) {
             $typefile = strrchr($_FILES['imgfile']['name'], ".");
 
             if ($typefile == '.jpg' || $typefile == '.jpeg' || $typefile == '.png') {
-                $path = "upload/";
+                $path = "../assets/images/upload/";
                 $newname = $numrand . $date1 . $typefile;
                 $path_copy = $path . $newname;
                 move_uploaded_file($_FILES['imgfile']['tmp_name'], $path_copy);

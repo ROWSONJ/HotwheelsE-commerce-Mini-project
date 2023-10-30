@@ -18,8 +18,8 @@ if ($user) {
         $row = $result->fetch(PDO::FETCH_ASSOC);
 
         if (!empty($row['user_image'])) {
-            $profile_img = '<img src="../assets/images/' . $row['user_image'] . '" width="22" height="22" loading="lazy"
-            alt="' . $row['user_name'] . '" class="dummy-profile">';
+            $profile_img = '<img src="../assets/images/upload/' . $row['user_image'] . '" width="22" height="22" loading="lazy"
+            alt="' . $row['username'] . '" class="dummy-profile">';
         } else {
             $dummy_txt = strtoupper(substr($row['first_name'], 0, 1) . substr($row['last_name'], 0, 1));
             $profile_img = '<div class="dummy-profile">
