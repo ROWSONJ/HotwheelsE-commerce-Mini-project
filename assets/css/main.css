@@ -41,17 +41,17 @@ body{
     transition: margin-left 0.18s ease;
 }
 
-.container.active .signup{
+.container.active .login{
     margin-left: -50%;
     opacity: 0;
     transition: margin-left 0.18s ease, opacity 0.15s ease;
 }
 
-.container .signupcon{
+.container .signup{
     opacity: 0;
     transition: opacity 0.09s ease;
 }
-.container.active .signupcon{
+.container.active .signup{
     opacity: 1;
     transition: opacity 0.2s ease;
 }
@@ -72,7 +72,7 @@ body{
     bottom: 0;
     height: 3px;
     width: 30px;
-    background-color: #4070f4;
+    background-color: hsl(5, 100%, 69%);;
     border-radius: 25px;
 }
 
@@ -172,7 +172,7 @@ body{
     background-color: #265df2;
 }
 
-.form .signup-signupcon{
+.form .login-signup{
     margin-top: 30px;
     text-align: center;
 }
