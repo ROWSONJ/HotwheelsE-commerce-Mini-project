@@ -250,6 +250,23 @@
         font-size:1.5rem;
       }
       
+
+
+
+      .dummy-profile{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #000;
+      }
+      .dummy-profile-text{
+        font-size: 1.4rem;
+        color: white;
+      }
         
     </style>
 
@@ -331,7 +348,9 @@
             confirmButtonText: "Yes"
           }).then((result) => {
             if (result.isConfirmed) {
-              // Redirect to logout.php
+              "Deleted!",
+              "Your file has been deleted.",
+              "success"
               window.location.href = '../views/logout.php';
             }
           })
@@ -351,25 +370,41 @@
     <div class="row profile-container">
       <div class="col">
         <div class="profile" >
-          <?php
-          
-          if(isset($_SESSION['user_login'])){
-            $conn = conndb();
+        <?php
+        if (isset($_SESSION['user_login'])) {
             $user_id = $_SESSION['user_login'];
 
-            $stmt = $conn->query("SELECT * from users WHERE user_id = '$user_id'");
-          
-            $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-          }
-          ?>
-          <?php
-            if($row['user_image'] == '') {
-                echo '<img src="default-avatar.jpg">';
+            
+            $conn = conndb();
+            if ($conn) {
+                $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                $stmt->execute();
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($user) {
+                    if (!empty($user['user_image'])) {
+                        $profile_img = '<img src="../assets/images/upload' . $user['user_image'] . '">';
+                    } else {
+                        $dummy_txt = strtoupper(substr($user['first_name'], 0, 1) . substr($user['last_name'], 0, 1));
+                        $profile_img = '<div class="dummy-profile"><p class="dummy-profile-text">' . $dummy_txt . '</p></div>';
+                    }
+                } else {
+                    $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
+                }
             } else {
-                echo '<img src="upload/' . $row['user_image'] . '">';
+                // Handle the case where the database connection fails
+                $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
             }
-          ?>
+        } else {
+            // Handle the case where the user is not logged in
+            $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
+        }
+
+        // Display the user's profile image
+        echo $profile_img;
+        ?>
+
           <h2> <?php echo $row['username']?></h2>
 
           <p><?php echo $row['first_name'].' '.$row['last_name']?></p>
