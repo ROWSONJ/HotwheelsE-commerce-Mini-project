@@ -11,4 +11,9 @@
     return $result;
     var_dump($result);
     }
+
+    function checkLogin(){
+        return isset($_SESSION['user_login']);
+    }
+    
 ?>

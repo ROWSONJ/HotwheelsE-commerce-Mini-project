@@ -31,7 +31,7 @@
                     if($email == $row['email']){
                         if(password_verify($password, $row['password'])){
                             $_SESSION['user_login'] = $row['user_id'];
-                            header("location: profile.php");
+                            header("location: index.php");
                         }else{
                             $_SESSION['error'] = 'Wrong password!';
                             header("location: login.php");

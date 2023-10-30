@@ -1,5 +1,6 @@
 <?php 
     require '../global/conn.php';
+    require '../global/func.php';
     require '../global/header.php'; 
     require '../global/menubar.php';
     

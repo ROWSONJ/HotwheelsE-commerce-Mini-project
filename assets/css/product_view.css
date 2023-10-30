@@ -311,7 +311,6 @@
   'wght' 400,
   'GRAD' 0,
   'opsz' 24;
-  color: #00aa00
 }
 
 @media (min-width: 1200px){
@@ -320,6 +319,21 @@
     }
 }
  
-/*
-    BUTTON
-*/
+/* Styles for medium-sized screens */
+@media screen and (max-width: 1100px) {
+    .product-view {
+        display: block;
+        width: 100%;
+    }
+  }
+  
+  /* Styles for small screens */
+  @media screen and (max-width: 480px) {
+    .product-view {
+      width: 100%;
+    }
+  
+     ul {
+      flex-direction: column; /* For mobile, stack menu items vertically */
+    }
+  }

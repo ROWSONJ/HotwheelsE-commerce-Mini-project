@@ -4,16 +4,24 @@ if (!isset($_GET['product_id'])) {
   header("refresh: 10; http://localhost/mini-project-yrs3/mini-project/views/404.php");
   exit; // Exit to prevent further code execution
 }
-
 $getid = $_GET['product_id'];
 
+if (isset($_POST['add_to_cart'])) {
+  $product_id = $getid;
+  $user_id = $_SESSION['user_login']; // Replace with your user session variable
+  $quantity = $_POST['quantity']; // You should add the quantity input in your form
+  $total = $row['price']; // Get the price from your product data
+  $status = "active";
+}
+
 require '../global/conn.php'; // Assuming this is a PDO database connection script
+require '../global/func.php';
 require '../global/header.php';
 require '../global/menubar.php';
-require '../global/func.php';
+
+var_dump(checklogin());
 
 $conn = conndb(); // Assuming conndb() returns a PDO connection
-
 $sql = "SELECT p.*, c.category_name, b.carbrand_name FROM products p
       LEFT JOIN categories c ON p.category_id = c.category_id
       LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
@@ -35,10 +43,19 @@ if ($result) {
   // Handle any database query errors
   echo "Database error: " . $conn->error;
 }
+
+if (isset($_POST['add_to_cart'])) {
+  $product_id = $getid;
+  $user_id = $_SESSION['user_login']; // Replace with your user session variable
+  $quantity = $_POST['quantity']; // You should add the quantity input in your form
+  $total = $row['price']; // Get the price from your product data
+  $status = "active";
+}
 ob_end_flush();
 ?>
 
 <main>
+<article>
 <link rel="stylesheet" href="..\assets\css\product_view.css">
         <section class="sectionp">
             <div class="product-view">
@@ -91,7 +108,7 @@ ob_end_flush();
                       <p class="logis-head"> Shipping Delivery </p>
                       
                       <div class="logis-item">
-                      <span class="material-symbols-outlined">bolt</span>
+                      <span class="material-symbols-outlined" style="color: #00aa00;">bolt</span>
                       
                       <div class="logis-type">
                         <p class="logis-name">Express delivery</p>
@@ -100,7 +117,7 @@ ob_end_flush();
                       </div>
 
                       <div class="logis-item">
-                        <span class="material-symbols-outlined">package_2</span>
+                        <span class="material-symbols-outlined" style="color: #00aa00;">package_2</span>
                       <div class="logis-type">
                         <p class="logis-name">Standard delivery</p>
                         <p class="logis-detail">Ship via logistic partner (2-4 days)</p>
@@ -127,35 +144,25 @@ ob_end_flush();
                     </div>
                     </div>
                     <hr class="hr-product">
-                    
+                    <form action="../views/cart_view.php" method="post">
                     <div class="product-action">
                         <button class="sell-btn" type="button">Sell</button> 
                         <button class="add-to-cart-btn">
                           <span class="transition"></span>
                                   <span class="gradient"></span>
-                            <span class="label">Add to Cart</span>
+                            <span class="label" id="add to cart">Add to Cart</span>
                               </button>
                         <!--<button class="add-to-cart-btn" type="button">Add to Cart</button>-->
                     </div>
                 </div>
             </div>
         </section>
+</article>
 
-        <link rel="stylesheet" href="../assets/css/style.css">
+        <article>
+        <link rel="stylesheet" href="..\assets\css\style.css">
         <section class="section special">
-        <div class="container">
-          <!--
-          <div class="special-banner" style="background-image: url('./assets/images/special-banner.jpg')">
-            <h2 class="h3 banner-title">New Trend Edition</h2>
-
-            <a href="#" class="btn btn-link">
-              <span>Explore All</span>
-
-              <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-          </div>
-          -->
-          
+        <div class="container">          
           <div class="special-product">
 
             <h2 class="h2 section-title">
@@ -260,8 +267,16 @@ ob_end_flush();
 
         </div>
       </section>
+          </article>
     </main>
-    <?php require '../global/footer.php'; ?>
+    <script style="position: absolute; color: white;">
+    var userIsLoggedIn =  <?php echo isset($_SESSION['user_login']) && $_SESSION['user_login'] ? 'true' : 'false'; ?>;
+    var total = <?php echo $row['price']; ?>; 
+    var userId = <?php echo isset($_SESSION['user_login']) ? $_SESSION['user_login'] : 0; ?>;
+    var productId = <?php echo $getid; ?>;
+  </script>
+
+  <?php require '../global/footer.php'; ?>
 
 <!-- 
     - #GO TO TOP
@@ -276,6 +291,10 @@ ob_end_flush();
   -->
   <script src="../assets/js/script.js"></script>
 
+  <!-- 
+    - CSS link
+  -->
+  <link rel="stylesheet" href="../assets/css/style.css">
 
   <!-- 
     - ionicon link
