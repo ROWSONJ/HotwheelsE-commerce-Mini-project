@@ -48,21 +48,7 @@ require '../global/conn.php';
                             </div>
                     </label>   
                 <?php }?>
-                <?php if(isset($_SESSION['success'])){?>
-                    <label>
-                        <input type="checkbox" class="alertCheckbox" autocomplete="off" />
-                            <div class="alert success">
-                                <span class="alertClose">X</span>
-                                <span class="alertText">
-                                    <?php
-                                        echo $_SESSION['success'];
-                                        unset($_SESSION['success']);
-                                    ?>
-                                    <br class="clear"/>
-                                </span>
-                            </div>
-                    </label>   
-                <?php }?>
+                
                     
                     <div class="input-field">
                         <input type="email" name="email" placeholder="Enter your email" required>
@@ -101,7 +87,7 @@ require '../global/conn.php';
                         <i class="uil uil-user"></i>
                     </div>
                     <div class="input-field">
-                        <input type="date" name="dob" required>
+                        <input type="date" name="dob" placeholder="Enter your birthday" required>
                         <i class="uil uil-calender"></i>
                     </div>
                     <div class="input-field">
@@ -109,7 +95,7 @@ require '../global/conn.php';
                         <i class="uil uil-at"></i>
                     </div>   
                     <div class="input-field button" >
-                        <input type="button" value="Previous" name="previous" class="text login-link">
+                        <input type="button" value="Previous" name="previous" class="text login-link" style="background-color: #9b9b9b;">
                         <input type="submit" value="Signup" id="signup" name="signup" style="margin-top: 60px;">
                     </div>
               

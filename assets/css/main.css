@@ -12,7 +12,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f3f6ff;
+    background-color: #fff3f3;
 }
 
 .container{
@@ -72,7 +72,7 @@ body{
     bottom: 0;
     height: 3px;
     width: 30px;
-    background-color: hsl(5, 100%, 69%);
+    background-color: hsl(5, 100%, 69%);;
     border-radius: 25px;
 }
 
@@ -97,7 +97,7 @@ body{
 }
 
 .input-field input:is(:focus, :valid){
-    border-bottom-color: hsl(5, 100%, 69%);
+    border-bottom-color :#4070f4;
 }
 
 .input-field i{
@@ -145,7 +145,7 @@ body{
 }
 
 .form a.text{
-    color: hsl(5, 100%, 69%);
+    color: #4070f4;
     text-decoration: none;
 }
 .form a:hover{
