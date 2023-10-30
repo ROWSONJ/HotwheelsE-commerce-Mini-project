@@ -30,8 +30,17 @@
 
                     if($email == $row['email']){
                         if(password_verify($password, $row['password'])){
+                            echo '<script>
+                                setTimeout(function() {
+                                    swal({
+                                        title: "Login Success",
+                                        type: "success"
+                                    }, function() {
+                                        window.location = "profile.php"; 
+                                    });
+                                }, 1000);
+                            </script>';
                             $_SESSION['user_login'] = $row['user_id'];
-                            header("location: ../views/profile.php");
                         }else{
                             $_SESSION['error'] = 'Wrong password!';
                             header("location: ../views/login.php");
@@ -58,26 +67,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 
-if ($result) {
-        echo '<script>
-            setTimeout(function() {
-                swal({
-                    title: "Update Success",
-                    type: "success"
-                }, function() {
-                    window.location = "profile.php"; 
-                });
-            }, 1000);
-        </script>';
-    } else {
-        echo '<script>
-            setTimeout(function() {
-                swal({
-                    title: "Error!",
-                    type: "error"
-                }, function() {
-                    window.location = "profile.php"; 
-                });
-            }, 1000);
-        </script>';
-    }
