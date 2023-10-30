@@ -32,8 +32,8 @@ if (isset($_POST['carbrand'])) {
                 echo '<li class="product-item" release-date="' . $row['Release_Date'] . '">
                 <div class="product-card" tabindex="0">
                     <figure class="card-banner">
-                        <img src="./assets/images/' . $row['p_image'] . '" width="312" height="350" loading="lazy"
-                            alt="' . $row['product_name'] . '" class="image-contain">';
+                    <a class="image-contain" href="../views/products_view.php?product_id=' . $row['product_id'] . '"><img src="../assets/images/' . $row['p_image'] . '" width="312" height="350" loading="lazy"
+                    alt="' . $row['product_name'] . '" class="image-contain"></a>';
 
                 // Display the "New" badge if it's a new product
                 if ($isNewProduct) {

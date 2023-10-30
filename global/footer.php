@@ -168,13 +168,13 @@
             <p class="newsletter-text">
               Authoritatively morph 24/7 potentialities with error-free partnerships.
             </p>
-
+            <div class="newsletter-form">
             <form action="" class="newsletter-form">
               <input type="email" name="email" required placeholder="Email Address" class="newsletter-input">
 
               <button type="submit" class="btn btn-primary">Subscribe</button>
             </form>
-
+            </div>
           </div>
 
         </div>
@@ -188,8 +188,7 @@
       <p class="copyright">
     &copy; <span id="currentRightYear"></span> <a href="#" class="copyright-link">FAST LANE</a><span>. All Rights Reserved</span>
 </p>
-
-
+ 
       </div>
     </div>
 

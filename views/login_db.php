@@ -45,6 +45,7 @@
                                 }, 1000);
                             </script>';
                             $_SESSION['user_login'] = $row['user_id'];
+                            header("location: index.php");
                         }else{
                             $_SESSION['error'] = 'Wrong password!';
                             header("location: ../views/login.php");
