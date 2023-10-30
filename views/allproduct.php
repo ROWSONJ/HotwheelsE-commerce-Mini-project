@@ -3,6 +3,8 @@
   require '../global/func.php';
   require '../global/header.php'; 
   require '../global/menubar.php';
+
+  $product_id = $_GET['product_id'];
 ?>
 
     <main>
@@ -130,12 +132,20 @@
             <ul class="product-list" id="product-list">
                 <!-- Product Listing -->
                 <?php
-          $result = tablequery("SELECT p.*, c.category_name, b.carbrand_name FROM products p
-          LEFT JOIN categories c ON p.category_id = c.category_id
-          LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
-          WHERE (p.Release_Date IS NULL OR p.Release_Date <= CURDATE())
-          ORDER BY p.Release_Date DESC limit 8");
-  
+
+$sql = "SELECT p.*, c.category_name, b.carbrand_name
+FROM products p
+LEFT JOIN categories c ON p.category_id = c.category_id
+LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
+WHERE (p.Release_Date IS NULL OR p.Release_Date <= CURRENT_DATE)";
+
+if (!empty($product_id)) {
+$sql .= " AND p.product_id = '$product_id'";
+}
+
+$sql .= " ORDER BY p.Release_Date DESC LIMIT 8";
+ 
+$result= tablequery($sql);
   if ($result) {
       if ($result->rowCount() > 0) {
           // Use foreach to iterate through the result set

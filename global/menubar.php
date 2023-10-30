@@ -104,7 +104,9 @@ if ($user) {
               </div>
             </div>
           </div>
-
+          
+      <div class="search_resu" id="search-results"></div>
+      
     <div class="container">
       <div class="overlay" data-overlay></div>
 
@@ -141,7 +143,7 @@ if ($user) {
           </li>
 
           <li class="navbar-item">
-            <a href="profile.php" class="navbar-link">About</a>
+            <a href="../global/main.php" class="navbar-link">About</a>
           </li>
 
           <li class="navbar-item">
@@ -155,14 +157,30 @@ if ($user) {
 
         <ul class="nav-action-list">
 
+        <li>
+            <button class="nav-action-btn">
+        <div class="search-box">
+        <input checked="" class="checkbox" type="checkbox"> 
+        <div class="mainbox">
+            <div class="iconContainer">
+            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </div>
+         <input class="search_input" placeholder="search" type="text" id="search">
+        </div>
+    </div>
+          <span class="nav-action-text">Search</span>
+            </button>
+          </li>
+<!--
           <li>
             <button class="nav-action-btn">
-              <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+              
+            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
 
               <span class="nav-action-text">Search</span>
             </button>
           </li>
-
+-->
           <li>
             <a href="<?=$link?>" class="nav-action-btn">
               <?=$profile_img?>

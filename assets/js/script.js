@@ -1,3 +1,71 @@
+/**
+ * *  SEARCH PRODUCTS
+*/
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("search");
+  const searchResults = document.getElementById("search-results");
+
+  searchInput.addEventListener("input", function () {
+      const query = searchInput.value;
+
+      if (query === "") {
+          searchResults.innerHTML = "";
+          return;
+      }
+
+      // Create an XMLHttpRequest object
+      const xhr = new XMLHttpRequest();
+
+      // Configure the request
+      xhr.open("GET", "search.php?q=" + query, true);
+
+      // Define the request headers
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      // Handle the response
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              searchResults.innerHTML = xhr.responseText;
+          }
+      };
+
+      // Send the request
+      xhr.send();
+  });
+});
+
+/*
+  Border Search Display
+*/
+// Get references to the search input and search results container
+// Get references to the search input and search results container
+const searchInput = document.getElementById('search');
+const searchResults = document.getElementById('search-results');
+let timer;
+
+// Add an event listener to show results when the search input is focused
+searchInput.addEventListener('focus', () => {
+  searchResults.style.display = 'block';
+  clearTimeout(timer); // Clear any previous timers
+});
+
+// Add an event listener to hide results when the mouse leaves search results
+searchResults.addEventListener('mouseleave', () => {
+  timer = setTimeout(() => {
+    searchResults.style.display = 'none';
+  }, 1000); // 1000 milliseconds (1 second)
+});
+
+// Add an event listener to hide results when the search input loses focus
+searchInput.addEventListener('blur', () => {
+  timer = setTimeout(() => {
+    searchResults.style.display = 'none';
+  }, 1000); // 1000 milliseconds (1 second)
+});
+
+
+
+
 
 /**
  * *  Filter products in index.php
