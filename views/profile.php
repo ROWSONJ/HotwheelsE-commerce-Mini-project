@@ -250,23 +250,6 @@
         font-size:1.5rem;
       }
       
-
-
-
-      .dummy-profile{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background-color: #000;
-      }
-      .dummy-profile-text{
-        font-size: 1.4rem;
-        color: white;
-      }
         
     </style>
 
@@ -319,15 +302,77 @@
       </li>
       <hr>
       <li>
-        <a href="#" class="nav-link link-body-emphasis ">
+        <!-- Button trigger modal -->
+        <button type="button" class="nav-link link-body-emphasis" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
           </svg>
           Delete account
-          
-        </a>
-      </li>
-      <li>
+        </button>
+
+<!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <form action="deleteacc.php" method="POST" id="deleteForm">
+          <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Account?</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="inputPassword" name="password">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-danger" id="delete" name="deleteacc">Delete</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("#deleteForm").addEventListener("submit", function (e) {
+              e.preventDefault();
+
+              Swal.fire({
+                title: "Delete Account",
+                text: "Are you sure to delete your account?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  $.ajax({
+                    type: "POST",
+                    url: "deleteacc.php",
+                    data: {
+                      deleteacc: 1,
+                      password: $("#inputPassword").val(),
+                    },
+                    success: function (response) {
+                      if (response === "success") {
+                        // Redirect to the homepage after successful deletion
+                        window.location.href = "../views/index.php";
+                      } else {
+                        Swal.fire("Error", "Wrong password!", "error");
+                      }
+                    },
+                  });
+                }
+              });
+            });
+          });
+        </script>
+
+
 
       <button class="nav-link link-body-emphasis" id="logout">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -348,9 +393,9 @@
             confirmButtonText: "Yes"
           }).then((result) => {
             if (result.isConfirmed) {
-              "Deleted!",
-              "Your file has been deleted.",
-              "success"
+              'Logout!',
+              'Your has been logout.',
+              'success'
               window.location.href = '../views/logout.php';
             }
           })
@@ -370,41 +415,26 @@
     <div class="row profile-container">
       <div class="col">
         <div class="profile" >
-        <?php
-        if (isset($_SESSION['user_login'])) {
+          <?php
+          
+          if(isset($_SESSION['user_login'])){
+            $conn = conndb();
             $user_id = $_SESSION['user_login'];
 
-            
-            $conn = conndb();
-            if ($conn) {
-                $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
-                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-                $stmt->execute();
-                $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if ($user) {
-                    if (!empty($user['user_image'])) {
-                        $profile_img = '<img src="../assets/images/upload' . $user['user_image'] . '">';
-                    } else {
-                        $dummy_txt = strtoupper(substr($user['first_name'], 0, 1) . substr($user['last_name'], 0, 1));
-                        $profile_img = '<div class="dummy-profile"><p class="dummy-profile-text">' . $dummy_txt . '</p></div>';
-                    }
-                } else {
-                    $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
-                }
+            $stmt = $conn->query("SELECT * from users WHERE user_id = '$user_id'");
+          
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+          }
+          ?>
+          
+          <?php
+            if($row['user_image'] == '') {
+                echo '<img src="default-avatar.jpg">';
             } else {
-                // Handle the case where the database connection fails
-                $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
+                echo '<img src="../assets/images/upload/' . $row['user_image'] . '">';
             }
-        } else {
-            // Handle the case where the user is not logged in
-            $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
-        }
-
-        // Display the user's profile image
-        echo $profile_img;
-        ?>
-
+          ?>
           <h2> <?php echo $row['username']?></h2>
 
           <p><?php echo $row['first_name'].' '.$row['last_name']?></p>
@@ -477,7 +507,7 @@
         if($row['user_image'] == '') {
             echo '<img src="default-avatar.jpg" class="pic">';
           }else{
-            echo '<img src="upload/'.$row['user_image'].'"  class="pic">'; 
+            echo '<img src="../assets/images/upload/'.$row['user_image'].'"  class="pic">'; 
           }
         ?>
         <label for="formFile" class="form-label">Profile</label>
