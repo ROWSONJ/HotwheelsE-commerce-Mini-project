@@ -72,7 +72,7 @@ body{
     bottom: 0;
     height: 3px;
     width: 30px;
-    background-color: #4070f4;
+    background-color: hsl(5, 100%, 69%);
     border-radius: 25px;
 }
 
@@ -97,7 +97,7 @@ body{
 }
 
 .input-field input:is(:focus, :valid){
-    border-bottom-color: #4070f4;
+    border-bottom-color: hsl(5, 100%, 69%);
 }
 
 .input-field i{
@@ -145,7 +145,7 @@ body{
 }
 
 .form a.text{
-    color: #4070f4;
+    color: hsl(5, 100%, 69%);
     text-decoration: none;
 }
 .form a:hover{

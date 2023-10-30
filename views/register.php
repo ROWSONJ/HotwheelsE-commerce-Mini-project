@@ -80,13 +80,13 @@ require '../global/conn.php';
                         <input type="button" value="Next" name="Next" class="text signup-link"> 
                     </div>
                     <div class="login-signup">
-                            <span class="text">Already registered? <a href="login.php" class="text signup-link">Login</a></span>
+                            <span class="text">Already registered? <a href="../views/login.php" class="text signup-link">Login</a></span>
                     </div>
             </div>
 
 
 
-            <div class="form signup" style="height:105%;">
+            <div class="form signup" style="height:95%;">
             <span class="title">Registration</span>
                     <div class="input-field" style="margin-top:10px">
                         <input type="text" name="firstname" placeholder="Enter your first name" required>

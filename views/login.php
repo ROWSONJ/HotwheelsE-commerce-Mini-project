@@ -52,7 +52,7 @@
               <input type="submit" value="Login" name="login"> </div>
           </form>
           <div class="login-signup">
-          <span class="text">Not a member? <a href="register.php" class="text signup-link">Signup now</a></span>
+          <span class="text">Not a member? <a href="../views/register.php" class="text signup-link">Signup now</a></span>
           </div>
         </div>
       </div>
