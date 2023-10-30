@@ -74,7 +74,7 @@ if (isset($_POST['editprofile'])) {
         }
     }
 
-    // Now, update other fields (if necessary)
+
     $conn = conndb();
     $user_id = $_SESSION['user_login'];
 

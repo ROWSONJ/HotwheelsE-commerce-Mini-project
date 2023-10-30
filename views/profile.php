@@ -26,7 +26,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  
+ <!-- Include jQuery -->
+ <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+<!-- Add the SweetAlert library and its dependencies -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
@@ -113,63 +118,28 @@
       body {
         min-height: 100vh;
         min-height: -webkit-fill-available;
+        background: var(--white);
+        font-size: 1.6rem;
+        padding-block-start: 90px;
+        background: rgba(0,0,0,0.05);
       }
 
       html {
         height: -webkit-fill-available;
+        font-family: var(--ff-josefin-sans);
+        font-size: 10px;
+        scroll-behavior: smooth;
       }
 
       main {
         height: 100vh;
         height: -webkit-fill-available;
-        max-height: 100vh;
+        max-height: 1000vh;
         overflow-x: auto;
         overflow-y: hidden;
       }
 
-      .dropdown-toggle { outline: 0; }
-
-      .btn-toggle {
-        padding: .25rem .5rem;
-        font-weight: 600;
-        color: var(--bs-emphasis-color);
-        background-color: transparent;
-      }
-      .btn-toggle:hover,
-      .btn-toggle:focus {
-        color: rgba(var(--bs-emphasis-color-rgb), .85);
-        background-color: var(--bs-tertiary-bg);
-      }
-
-      .btn-toggle::before {
-        width: 1.25em;
-        line-height: 0;
-        content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
-        transition: transform .35s ease;
-        transform-origin: .5em 50%;
-      }
-
-      [data-bs-theme="dark"] .btn-toggle::before {
-        content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
-      }
-
-      .btn-toggle[aria-expanded="true"] {
-        color: rgba(var(--bs-emphasis-color-rgb), .85);
-      }
-      .btn-toggle[aria-expanded="true"]::before {
-        transform: rotate(90deg);
-      }
-
-      .btn-toggle-nav a {
-        padding: .1875rem .5rem;
-        margin-top: .125rem;
-        margin-left: 1.25rem;
-      }
-      .btn-toggle-nav a:hover,
-      .btn-toggle-nav a:focus {
-        background-color: var(--bs-tertiary-bg);
-      }
-
+     
       .scrollarea {
         overflow-y: auto;
       }
@@ -181,29 +151,17 @@
       
 
       
-      html {
-        font-family: var(--ff-josefin-sans);
-        font-size: 10px;
-        scroll-behavior: smooth;
-      }
-
-      body {
-        background: var(--white);
-        font-size: 1.6rem;
-        padding-block-start: 90px;
-        background: rgba(0,0,0,0.05);
-      } 
-
       .profile{
         position: fixed;
         z-index:3;
         translate: -50% -50%;
         width:25%;
-        padding: 70px 30px 44px;
-        border-radius: 1.25rem;
+        height: 45%;
+        padding: 70px 30px 44px 30px;
+        border-radius: 1rem;
         background: #fff;
         text-align: center;
-        margin-top: 200px;
+        margin-top: 180px;
         margin-left: 200px;
 
       }
@@ -212,8 +170,8 @@
         aspect-ratio: 1/1;
         object-fit: cover;
         border-radius: 50%;
-        margin: 0 auto; /* Center the image horizontally */
-        display: block; /* Ensure block-level rendering to center horizontally */
+        margin: 0 auto; 
+        display: block; 
         margin-bottom: 20px;
       }
 
@@ -222,8 +180,8 @@
         aspect-ratio: 1/1;
         object-fit: cover;
         border-radius: 50%;
-        margin: 0 auto; /* Center the image horizontally */
-        display: block; /* Ensure block-level rendering to center horizontally */
+        margin: 0 auto; 
+        display: block; 
         margin-bottom: 20px;
       }
 
@@ -244,17 +202,19 @@
         z-index:3;
         translate: -50% -50%;
         width:25%;
-        padding: 70px 30px 44px;
-        border-radius: 1.25rem;
+        height: 45%;
+        padding: 70px 30px 44px 30px;
+        border-radius: 1rem;
         background: #fff;
         text-align: center;
-        margin-top: 200px;
+        margin-top: 180px;
         margin-left: 200px;
 
       }
       .buyer h2{
         font-size: 32px;
         margin: 0 0 25px:
+        padding: 70px 30px 44px;
       }
 
       .buyer p{
@@ -269,11 +229,12 @@
         z-index:3;
         translate: -50% -50%;
         width:25%;
-        padding: 70px 30px 44px;
-        border-radius: 1.25rem;
+        height: 45%;
+        padding: 70px 30px 44px 30px;
+        border-radius: 1rem;
         background: #fff;
         text-align: center;
-        margin-top: 200px;
+        margin-top: 180px;
         margin-left: 200px;
 
       }
@@ -288,6 +249,7 @@
         font-weight:500;
         font-size:1.5rem;
       }
+      
         
     </style>
 
@@ -303,53 +265,82 @@
 <main class="d-flex flex-nowrap">
   
 
-  <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; ">
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: calc(100vh - 90px);">
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-          Home
+        <a href="#" class="nav-link link-body-emphasis" aria-current="page">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+          </svg>
+          Profile
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-          Dashboard
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+          </svg>
+          Buying
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Orders
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag" viewBox="0 0 16 16">
+            <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z"/>
+            <path d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z"/>
+          </svg>
+          Selling
         </a>
       </li>
       <li>
         <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Products
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket" viewBox="0 0 16 16">
+            <path d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5V6a.5.5 0 0 1-.5.5 1.5 1.5 0 0 0 0 3 .5.5 0 0 1 .5.5v1.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 11.5V10a.5.5 0 0 1 .5-.5 1.5 1.5 0 1 0 0-3A.5.5 0 0 1 0 6V4.5ZM1.5 4a.5.5 0 0 0-.5.5v1.05a2.5 2.5 0 0 1 0 4.9v1.05a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-1.05a2.5 2.5 0 0 1 0-4.9V4.5a.5.5 0 0 0-.5-.5h-13Z"/>
+          </svg>
+          Coupon & rewards
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a href="#" class="nav-link link-body-emphasis ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+          </svg>
+          Delete account
+          
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
-        </a>
+
+      <button class="nav-link link-body-emphasis" id="logout">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+          <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+        </svg>
+        Logout
+      </button>
+      <script>
+        $('#logout').on('click', function () {
+          Swal.fire({
+            title: "Logout?",
+            text: "Do you want to logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Redirect to logout.php
+              window.location.href = '../views/logout.php';
+            }
+          })
+        })
+      </script>
+
+        
       </li>
     </ul>
-    <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
-      </a>
-      <ul class="dropdown-menu text-small shadow">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
-      </ul>
-    </div>
   </div>
 
   
@@ -357,7 +348,7 @@
       
 
   <div class="container text-center">
-    <div class="row">
+    <div class="row profile-container">
       <div class="col">
         <div class="profile" >
           <?php
@@ -481,7 +472,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" name="editprofile" class="btn btn-primary">Save changes</button>
+        <button type="submit" name="editprofile" class="btn btn-primary" id="saveChangesButton" disabled>Save changes</button>
       </div>
     </from>
     </div>
@@ -490,7 +481,28 @@
   </div>
 </div>
 
+
+
+
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get the "Save changes" button
+    const saveChangesButton = document.getElementById('saveChangesButton');
+
+    // Get all the input fields
+    const inputFields = document.querySelectorAll('.form-control');
+
+    // Function to enable the button when any input field changes
+    function enableSaveButton() {
+      saveChangesButton.disabled = false;
+    }
+
+    // Add an event listener to each input field
+    inputFields.forEach(function (inputField) {
+      inputField.addEventListener('input', enableSaveButton);
+    });
+  });
+
             /* global bootstrap: false */
       (() => {
         'use strict'
@@ -499,6 +511,10 @@
           new bootstrap.Tooltip(tooltipTriggerEl)
         })
       })()
+
+
+
+  
 
     </script>
 

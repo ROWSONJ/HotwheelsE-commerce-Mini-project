@@ -18,10 +18,28 @@
 
 
 
-                    $_SESSION['user_delete'] = $row['user_id'];
-                    header("location: ../views/login.php");
+                    echo '<script>
+                        Swal.fire({
+                            title: "Logout?",
+                            text: "You want to logout?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Yes"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            Swal.fire(
+                                "Logout!",
+                                "Your has been logout.",
+                                "success"
+                            )
+                            }
+                        })
+                    </script>';
                 }else{
                     $_SESSION['error'] = 'Wrong password!';
                     header("location: ../views/login.php");
                 }
             }
+        }
