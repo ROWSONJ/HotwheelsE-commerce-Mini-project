@@ -1,7 +1,11 @@
 <?php
   $_SESSION['current_page'] = $_SERVER['REQUEST_URI']; 
-  print_r($_SESSION['current_page']);
-  $user = $_SESSION['user_login'];
+  //print_r($_SESSION['current_page']);
+  if (isset($_SESSION['user_login'])) {
+    $user = $_SESSION['user_login'];
+} else {
+    $user = ''; // or any default value you want
+}
 
 if (!checkLogin()) {
     $link = "../views/login.php";
@@ -50,12 +54,21 @@ if ($user) {
           <h2>Add to cart</h2>
         </div>
         <?php
-if ($user) {
-    $cart = tablequery("SELECT c.*, p.product_name, p.price, p.p_image
+
+        $cart = tablequery("SELECT c.*, p.product_name, p.price, p.p_image
                         FROM carts c
                         JOIN products p ON c.product_id = p.product_id
-                        WHERE c.user_id = '$user'");
-    $rowCount = $cart->rowCount();
+                        WHERE c.user_id = '$user'"); 
+          
+          if (empty($cart)) {
+            $rowCount = 0;
+        } else {
+            $rowCount = $cart->rowCount();
+        }
+        
+if ($user) {
+                   
+    //print_r($rowCount);
     $alltotal = 0; // Initialize the total price.
 
     if ($rowCount > 0) {
@@ -91,7 +104,7 @@ if ($user) {
                 <h6>Total: <span class="cart-total-cast">$ ' . $alltotal . '</span></h6>
                 </div>
                 <div class="cart-button">
-                  <a href="#" class="cart-btn2">View Cart(' . $rowCount . ')</a>
+                  <a href="../views/checkout.php" class="cart-btn2">View Cart(' . $rowCount . ')</a>
                   <a href="../views/allproduct.php" class="cart-btn1">Continue Shopping</a>
               </div>
             </div>';
@@ -111,7 +124,6 @@ if ($user) {
   </div>';
 }
 ?>
-
 
       </div>
     </div>
@@ -208,7 +220,7 @@ if ($user) {
 
               <span class="nav-action-text">Wishlist</span>
 
-              <data class="nav-action-badge" value="5" aria-hidden="true">5</data>
+              <data class="nav-action-badge" value="0" aria-hidden="true">0</data>
             </a>
           </li>
 
@@ -216,9 +228,9 @@ if ($user) {
             <button class="nav-action-btn" id="cart-icon">
             <ion-icon name="bag-outline" aria-hidden="true"></ion-icon>
                 
-              <data class="nav-action-text" value="318.00">Basket: <strong>$318.00</strong></data>
+              <data class="nav-action-text" value="#">Basket: <strong>$318.00</strong></data>
 
-              <data class="nav-action-badge" value="4" aria-hidden="true">4</data>
+              <data class="nav-action-badge" value="<?=$rowCount?>" aria-hidden="true"><?=$rowCount?></data>
             </button>
           </li>
 

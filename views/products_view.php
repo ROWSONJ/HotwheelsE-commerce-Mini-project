@@ -20,8 +20,8 @@ require '../global/conn.php'; // Assuming this is a PDO database connection scri
 require '../global/func.php';
 require '../global/header.php';
 require '../global/menubar.php';
-print_r($_SESSION['user_login']);
-var_dump(checklogin());
+//print_r($_SESSION['user_login']);
+//var_dump(checklogin());
 
 $conn = conndb(); // Assuming conndb() returns a PDO connection
 $sql = "SELECT p.*, c.category_name, b.carbrand_name FROM products p
@@ -36,7 +36,7 @@ if ($result) {
 
   if (!$row) {
       // Handle the case where no result is found
-      header("Location: http://localhost/mini-project-yrs3/mini-project/views/404.php");
+      header("Location: ../views/404.php");
       exit; // Exit to prevent further code execution
   }
 
@@ -147,7 +147,6 @@ ob_end_flush();
                     </div>
                     <hr class="hr-product">
                     <form action="add_to_cart.php" method="post">
-    
     <div class="product-action">
         <input type="hidden" name="product_id" value="<?=$row['product_id']?>">
         <input type="hidden" name="quantity" value="1">
@@ -279,9 +278,6 @@ ob_end_flush();
     </main>
     <script style="position: absolute; color: white;">
     var userIsLoggedIn =  <?php echo isset($_SESSION['user_login']) && $_SESSION['user_login'] ? 'true' : 'false'; ?>;
-    var total = <?php echo $row['price']; ?>; 
-    var userId = <?php echo isset($_SESSION['user_login']) ? $_SESSION['user_login'] : 0; ?>;
-    var productId = <?php echo $getid; ?>;
   </script>
 
   <?php require '../global/footer.php'; ?>
