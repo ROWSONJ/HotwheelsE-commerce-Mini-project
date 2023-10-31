@@ -1,5 +1,6 @@
 <?php
-
+  $_SESSION['current_page'] = $_SERVER['REQUEST_URI']; 
+  print_r($_SESSION['current_page']);
   $user = $_SESSION['user_login'];
 
 if (!checkLogin()) {
@@ -39,72 +40,84 @@ if ($user) {
   <link rel="stylesheet" href="..\assets\css\style.css">
   <div class="page__overlay"></div>
   <header class="header" data-header>
+
   <div class="cart-container">
     <div class="cart" style="top: 0;">
-            <div class="cart-top">Add To Card</div>
-              
-              <div class="cart-inner">
-                <div class="cart-title">
-                <span class="material-symbols-outlined" style="position: absolute; left: 0; top: 100%; width: 24px; height: 30px; margin-top: -15px; transform: translateY(-50%);">check_circle</span>
-<h2 class="#">Add to cart</h2>
-                </div>
-                    <div class="cart-item">
-                      <div class="cart-item-warpper">
-                        <div class="cart-item-img">
-                          <img src="../assets/images/insta-1.jpg" width="64px" height="64px" alt="" class="cart-img">
-                        </div>             
-                      <div class="cart-item-detail">
-                        <span class="material-symbols-outlined" style="position: absolute; width: 34px; height: 34px; background-position: -213px 0; 
-                        right: 4px; top: 4px; padding: 0; transform: scale(0.72); cursor: pointer;">close</span>
-                        <p class="cart-item-name">
-                        <a href="#" class="a-item-name"> Earbuds sasa </a>
-                        </p>
-                        <span class="cart-item-price">$ 25</span>
-                    </div>  
-                  </div>
+      <div class="cart-top">Add To Card</div>
+      <div class="cart-inner">
+        <div class="cart-title">
+          <span class="material-symbols-outlined" style="position: absolute; left: 0; top: 100%; width: 24px; height: 30px; margin-top: -15px; transform: translateY(-50%);">check_circle</span>
+          <h2>Add to cart</h2>
+        </div>
+        <?php
+if ($user) {
+    $cart = tablequery("SELECT c.*, p.product_name, p.price, p.p_image
+                        FROM carts c
+                        JOIN products p ON c.product_id = p.product_id
+                        WHERE c.user_id = '$user'");
+    $rowCount = $cart->rowCount();
+    $alltotal = 0; // Initialize the total price.
 
-                  <div class="cart-item-warpper">
-                        <div class="cart-item-img">
-                          <img src="../assets/images/insta-1.jpg" width="64px" height="64px" alt="" class="cart-img">
-                        </div>             
-                      <div class="cart-item-detail">
-                        <span class="material-symbols-outlined" style="position: absolute; width: 34px; height: 34px; background-position: -213px 0; 
-                        right: 4px; top: 4px; padding: 0; transform: scale(0.72);">close</span>
-                        <p class="cart-item-name">
-                        <a href="#" class="a-item-name"> Earbuds sasa </a>
-                        </p>
-                        <span class="cart-item-price">$ 25</span>
-                    </div>  
-                  </div>
-                  <div class="cart-item-warpper">
-                        <div class="cart-item-img">
-                          <img src="../assets/images/insta-1.jpg" width="64px" height="64px" alt="" class="cart-img">
-                        </div>             
-                      <div class="cart-item-detail">
-                        <span class="material-symbols-outlined" style="position: absolute; width: 34px; height: 34px; background-position: -213px 0; 
-                        right: 4px; top: 4px; padding: 0; transform: scale(0.72);">close</span>
-                        <p class="cart-item-name">
-                        <a href="#" class="a-item-name"> Earbuds sasa </a>
-                        </p>
-                        <span class="cart-item-price">$ 25</span>
-                    </div>  
-                  </div>
-                  
-                </div>
-                  <div class="cart-bottom">
-                    <div class="cart-total">
-                    <h6>Total: <span class="cart-total-cast">$25</span></h6>
-                    </div>
-                    <div class="cart-button">
-                      <a href="#" class="cart-btn2">View Cart (1)</a>
-                      <a href="#" class="cart-btn1">Continue Shopping</a>
-                  </div>
+    if ($rowCount > 0) {
+        echo '<div class="cart-item">';
+        foreach ($cart as $row) {
+            // Calculate the total for each item and add it to the overall total.
+            $itemTotal = $row['price'] * $row['quantity'];
+            $alltotal += $itemTotal;
 
-                </div>
-              </div>
+            echo '<div class="cart-item-warpper">
+            <div class="cart-item-img">
+                <img src="../assets/images/' . $row['p_image'] . '" width="64px" height="64px" alt="" class="cart-img">
             </div>
-          </div>
-          
+            <div class="cart-item-detail">
+                <form action="../views/delete_cart.php" method="post">
+                <input type="hidden" name="product_id" value="'.$row['product_id'].'">
+                <input type="hidden" name="user_id" value="'.$row['user_id'].'">
+                <button type="submit" class="delete-button" name="delete_item">
+                <span class="material-symbols-outlined" style="position: absolute; width: 34px; height: 34px; background-position: -213px 0; 
+                right: 4px; top: 4px; padding: 0; transform: scale(0.72); cursor: pointer;">close</span>
+                </form>
+                <p class="cart-item-name">
+                    <a href="#" class="a-item-name"> ' . $row['product_name'] . ' </a>
+                </p>
+                <span class="cart-item-price">$ ' . $row['total'] . '</span>
+            </div>
+        </div>';
+        }
+
+        echo '</div>
+        <div class="cart-bottom">
+                <div class="cart-total">
+                <h6>Total: <span class="cart-total-cast">$ ' . $alltotal . '</span></h6>
+                </div>
+                <div class="cart-button">
+                  <a href="#" class="cart-btn2">View Cart(' . $rowCount . ')</a>
+                  <a href="../views/allproduct.php" class="cart-btn1">Continue Shopping</a>
+              </div>
+            </div>';
+    } else {
+        echo '<div class="cart-item-empty">
+        <p class="cart-text-empty">Your cart is empty</p>
+        <div class="cart-button">
+            <a href="../views/allproduct.php" class="cart-btn2">Start Shopping</a>
+        </div>';
+    }
+} else {
+    echo '<div class="cart-item-empty">
+    <p class="cart-text-empty">Your cart is empty</p>
+    <div class="cart-button">
+        <a href="../views/allproduct.php" class="cart-btn2">Start Shopping</a>
+    </div>
+  </div>';
+}
+?>
+
+
+      </div>
+    </div>
+  </div>
+
+
       <div class="search_resu" id="search-results"></div>
       
     <div class="container">
@@ -131,7 +144,7 @@ if ($user) {
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <a href="../views/index.php" class="navbar-link">Home</a>
+            <a href="../views/allproduct.php" class="navbar-link">All Shop</a>
           </li>
 
           <li class="navbar-item">
@@ -139,7 +152,7 @@ if ($user) {
           </li>
           
           <li class="navbar-item">
-            <a href="#" class="navbar-link">Upcoming</a>
+            <a href="#upcoming" class="navbar-link">Upcoming</a>
           </li>
 
           <li class="navbar-item">

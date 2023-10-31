@@ -2,196 +2,234 @@
   require '../global/conn.php';
   require '../global/func.php';
   require '../global/header.php'; 
-  require '../global/menubar.php';
+  
+  $user = $_SESSION['user_login'];
+  print_r($user);
+
+if (!checkLogin()) {
+    $link = "../views/login.php";
+    $text = "Login / Register";
+    $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
+} else {
+    $link = "../views/profile.php";
+    $text = "Profile";
+}
+
+if ($user) {
+    $result = tablequery("SELECT * FROM users WHERE user_id = '$user'");
+    
+    if ($result) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+
+        if (!empty($row['user_image'])) {
+            $profile_img = '<img src="../assets/images/upload/' . $row['user_image'] . '" width="22" height="22" loading="lazy"
+            alt="' . $row['username'] . '" class="dummy-profile">';
+        } else {
+            $dummy_txt = strtoupper(substr($row['first_name'], 0, 1) . substr($row['last_name'], 0, 1));
+            $profile_img = '<div class="dummy-profile">
+                <p class="dummy-profile-text">' . $dummy_txt . '</p>
+            </div>';
+        }
+    } else {
+        $profile_img = '<ion-icon name="person-outline" aria-hidden="true"></ion-icon>';
+    }
+}
 ?>
 
-    <main>
-    <section class="sectiona">
-      <div class="sidebar">
-        <div class="sidebar-scrollbar">
+<!-- 
+    - #HEADER
+  -->
+  <link rel="stylesheet" href="..\assets\css\style.css">
+  <div class="page__overlay"></div>
+  <header class="header" data-header>
 
-        <div class="topic-cat">
-            <div class="box-cat-tem1 header-cat">
-              <div class="box-cat-tem2 header-title">
-              <h4 class="p-sidebar">Categories</h4>
-              </div>
-            </div>
-            <div class="box-cat">
-              <div class="box-cat-fl">
-                <div class="box-cat-width">
-              <div class="box-cat-pad">
-                <ul class="cat-item-list">
+  <div class="cart-container">
+    <div class="cart" style="top: 0;">
+      <div class="cart-top">Add To Card</div>
+      <div class="cart-inner">
+        <div class="cart-title">
+          <span class="material-symbols-outlined" style="position: absolute; left: 0; top: 100%; width: 24px; height: 30px; margin-top: -15px; transform: translateY(-50%);">check_circle</span>
+          <h2>Add to cart</h2>
+        </div>
         <?php
-          $conn = conndb();
-          $result = tablequery('SELECT * FROM categories');
+if ($user) {
+    $cart = tablequery("SELECT c.*, p.product_name, p.price, p.p_image
+                        FROM carts c
+                        JOIN products p ON c.product_id = p.product_id
+                        WHERE c.user_id = '$user'");
+    $rowCount = $cart->rowCount();
+    $alltotal = 0; // Initialize the total price.
 
-          if($result){
-            foreach($result as $row){
-              echo '<li>
-              <div class="box-cat-tem1 cat-item">
-                  <a href="#" class="cat-item-text">'.$row['category_name'].'</a>
-              </div>
-              </il>';
-            }
-          }else{
-            echo "0 results";
-          }
-        ?>
-              </ul>
-              </div>
-            </div>
-          </div>
-            </div>
-          </div>
+    if ($rowCount > 0) {
+        echo '<div class="cart-item">';
+        foreach ($cart as $row) {
+            // Calculate the total for each item and add it to the overall total.
+            $itemTotal = $row['price'] * $row['quantity'];
+            $alltotal += $itemTotal;
 
-          <div class="topic-cat">
-            <div class="box-cat-tem1 header-cat">
-              <div class="box-cat-tem2 header-title">
-              <h4 class="p-sidebar">Car Brands</h4>
-              </div>
+            echo '<div class="cart-item-warpper">
+            <div class="cart-item-img">
+                <img src="../assets/images/' . $row['p_image'] . '" width="64px" height="64px" alt="" class="cart-img">
             </div>
-            <div class="box-cat">
-              <div class="box-cat-fl">
-                <div class="box-cat-width">
-              <div class="box-cat-pad">
-                <ul class="cat-item-list">
-                <?php
-          $conn = conndb();
-          $result = tablequery('SELECT DISTINCT SUBSTRING(carbrand_id, 1, 2) AS carbrand_text FROM carbrands');
+            <div class="cart-item-detail">
+                <form action="../views/delete_cart.php" method="post">
+                <input type="hidden" name="product_id" value="'.$row['product_id'].'">
+                <input type="hidden" name="user_id" value="'.$row['user_id'].'">
+                <button type="submit" class="delete-button" name="delete_item">
+                <span class="material-symbols-outlined" style="position: absolute; width: 34px; height: 34px; background-position: -213px 0; 
+                right: 4px; top: 4px; padding: 0; transform: scale(0.72); cursor: pointer;">close</span>
+                </form>
+                <p class="cart-item-name">
+                    <a href="#" class="a-item-name"> ' . $row['product_name'] . ' </a>
+                </p>
+                <span class="cart-item-price">$ ' . $row['total'] . '</span>
+            </div>
+        </div>';
+        }
 
-          if($result){
-            foreach($result as $row){
-              echo '<li>
-              <div class="box-cat-tem1 cat-item">
-                  <a href="#" class="cat-item-text">'.$row['carbrand_text'].'</a>
+        echo '</div>
+        <div class="cart-bottom">
+                <div class="cart-total">
+                <h6>Total: <span class="cart-total-cast">$ ' . $alltotal . '</span></h6>
+                </div>
+                <div class="cart-button">
+                  <a href="#" class="cart-btn2">View Cart(' . $rowCount . ')</a>
+                  <a href="../views/allproduct.php" class="cart-btn1">Continue Shopping</a>
               </div>
-              </il>';
-            }
-          }else{
-            echo "0 results";
-          }
-        ?>
-              </ul>
-              </div>
-            </div>
-          </div>
-            </div>
-          </div>
+            </div>';
+    } else {
+        echo '<div class="cart-item-empty">
+        <p class="cart-text-empty">Your cart is empty</p>
+        <div class="cart-button">
+            <a href="../views/allproduct.php" class="cart-btn2">Start Shopping</a>
+        </div>';
+    }
+} else {
+    echo '<div class="cart-item-empty">
+    <p class="cart-text-empty">Your cart is empty</p>
+    <div class="cart-button">
+        <a href="../views/allproduct.php" class="cart-btn2">Start Shopping</a>
+    </div>
+  </div>';
+}
+?>
 
-          <div class="topic-cat">
-            <div class="box-cat-tem1 header-cat">
-              <div class="box-cat-tem2 header-title">
-              <h4 class="p-sidebar">Car Brands</h4>
-              </div>
-            </div>
-            <div class="box-cat">
-              <div class="box-cat-fl">
-                <div class="box-cat-width">
-              <div class="box-cat-pad">
-                <ul class="cat-item-list">
-                <?php
-          $conn = conndb();
-          $result = tablequery('SELECT * FROM carbrands');
-
-          if($result){
-            foreach($result as $row){
-              echo '<li>
-              <div class="box-cat-tem1 cat-item">
-                  <a href="#" class="cat-item-text">'.$row['carbrand_name'].'</a>
-              </div>
-              </il>';
-            }
-          }else{
-            echo "0 results";
-          }
-        ?>
-              </ul>
-              </div>
-            </div>
-          </div>
-            </div>
-          </div>
-
-          </div>
       </div>
+    </div>
+  </div>
 
-          </div>
-        </div>
 
-        <!--
-            PRODUCT SECTION
-        -->
-
-        <div class="section product">
-        <div class="container">
-            <h2 class="h2 section-title" style="text-align: left;
-            margin-left: 2.2rem; margin-bottom: 6rem;">Explore The Hot Wheels Realms</h2>
-
-            <ul class="product-list" id="product-list">
-                <!-- Product Listing -->
-                <?php
-                $result = tablequery("SELECT p.*, c.category_name, b.carbrand_name FROM products p
-                  LEFT JOIN categories c ON p.category_id = c.category_id
-                  LEFT JOIN carbrands b ON p.carbrand_id = b.carbrand_id
-                  WHERE (p.Release_Date IS NULL OR p.Release_Date <= CURDATE())
-                  ORDER BY p.Release_Date DESC limit 8");
-
-                if ($result) {
-                    if ($result->rowCount() > 0) {
-                        foreach ($result as $row) {
-                            $isNewProduct = false;
-
-                            if (!empty($row['Release_Date'])) {
-                                $releaseDate = strtotime($row['Release_Date']);
-                                $oneWeekAgo = strtotime('-1 week');
-                                if ($releaseDate > $oneWeekAgo) {
-                                    $isNewProduct = true;
-                                }
-                            }
-
-                            echo '<li class="product-item" release-date="' . $row['Release_Date'] . '">
-                                <div class="product-card" tabindex="0">
-                                    <figure class="card-banner">
-                                        <a class="image-contain" href="../views/products_view.php?product_id=' . $row['product_id'] . '">
-                                            <img src="../assets/images/' . $row['p_image'] . '" width="312" height="350" loading="lazy"
-                                                alt="' . $row['product_name'] . '" class="image-contain">
-                                        </a>';
-
-                            if ($isNewProduct) {
-                                echo '<div class="card-badge">New</div>';
-                            }
-
-                            echo '
-                                        <ul class="card-action-list">
-                                            <!-- Card actions here -->
-                                        </ul>
-                                    </figure>
-                                    <div class="card-content">
-                                        <div class="card-cat">
-                                            <a href="#" class="card-cat-link">' . $row['category_name'] . '</a> /
-                                            <a href="#" class="card-cat-link">' . $row['carbrand_name'] . '</a>
-                                        </div>
-                                        <h3 class="h3 card-title">
-                                            <a href="#">' . $row['product_name'] . '</a>
-                                        </h3>
-                                        <data class="card-price" value="180.85">฿' . $row['price'] . '</data>
-                                    </div>
-                                </div>
-                            </li>';
-                        }
-                    } else {
-                        echo "We apologize, but there are currently no products available at this time.";
-                    }
-                } else {
-                    echo "Database error";
-                }
-                ?>
-            </ul>
-        </div>
-        </div>
-    </section>
+      <div class="search_resu" id="search-results"></div>
       
-</main>
+    <div class="container">
+      <div class="overlay" data-overlay></div>
+
+      <a href="../views/index.php" class="logo">
+        <img src="../assets/images/fastlanelogo.svg" width="160" height="50" alt="FastLane logo">
+      </a>
+
+      <button class="nav-open-btn" data-nav-open-btn aria-label="Open Menu">
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+      <nav class="navbar" data-navbar>
+
+        <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+        <a href="#" class="logo">
+          <img src="../assets/images/fastlanelogo.svg" width="190" height="50" alt="FastLane logo">
+        </a>
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="../views/allproduct.php" class="navbar-link">All Shop</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#" class="navbar-link">Ready to ship</a>
+          </li>
+          
+          <li class="navbar-item">
+            <a href="#upcoming" class="navbar-link">Upcoming</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="../global/main.php" class="navbar-link">About</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#" class="navbar-link">Contact</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="../global/test.php" class="navbar-link">Test</a>
+          </li>
+        </ul>
+
+        <ul class="nav-action-list">
+
+        <li>
+            <button class="nav-action-btn">
+        <div class="search-box">
+        <input checked="" class="checkbox" type="checkbox"> 
+        <div class="mainbox">
+            <div class="iconContainer">
+            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </div>
+         <input class="search_input" placeholder="search" type="text" id="search">
+        </div>
+    </div>
+          <span class="nav-action-text">Search</span>
+            </button>
+          </li>
+<!--
+          <li>
+            <button class="nav-action-btn">
+              
+            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+
+              <span class="nav-action-text">Search</span>
+            </button>
+          </li>
+-->
+          <li>
+            <a href="<?=$link?>" class="nav-action-btn">
+              <?=$profile_img?>
+
+              <span class="nav-action-text"><?=$text?></span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="nav-action-btn">
+              <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+
+              <span class="nav-action-text">Wishlist</span>
+
+              <data class="nav-action-badge" value="5" aria-hidden="true">5</data>
+            </a>
+          </li>
+
+          <li>
+            <button class="nav-action-btn" id="cart-icon">
+            <ion-icon name="bag-outline" aria-hidden="true"></ion-icon>
+                
+              <data class="nav-action-text" value="318.00">Basket: <strong>$318.00</strong></data>
+
+              <data class="nav-action-badge" value="4" aria-hidden="true">4</data>
+            </button>
+          </li>
+
+        </ul>
+
+      </nav>
+      
+    </div>
+  </header>
+    
 <?php require '../global/footer.php'; ?>
 
 
