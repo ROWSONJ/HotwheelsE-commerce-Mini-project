@@ -53,7 +53,7 @@ if (isset($_POST['editprofile'])) {
                             swal({
                                 title: "Error!",
                                 type: "error"
-                            }, function() {
+                            },function() {
                                 window.location = "profile.php"; 
                             });
                         }, 1000);
@@ -65,52 +65,51 @@ if (isset($_POST['editprofile'])) {
                         swal({
                             title: "File not correct",
                             type: "error"
-                        }, function() {
-                            window location = "profile.php"; 
+                        },function() {
+                            window.location = "profile.php"; 
                         });
                     }, 1000);
                     </script>';
             }
         }
-    }
-
-
-    $conn = conndb();
-    $user_id = $_SESSION['user_login'];
-
-    $stmt = $conn->prepare("UPDATE users SET username=:username, email=:email, first_name=:firstname, last_name=:lastname, date_of_birth=:dob, address=:address WHERE user_id=:user_id");
-    $stmt->bindParam(":firstname", $firstname);
-    $stmt->bindParam(":lastname", $lastname);
-    $stmt->bindParam(":username", $username);
-    $stmt->bindParam(":email", $email);
-    $stmt->bindParam(":dob", $dob);
-    $stmt->bindParam(":address", $address);
-    $stmt->bindParam(":user_id", $user_id);
-
-    $result = $stmt->execute();
-
-    if ($result) {
-        echo '<script>
-            setTimeout(function() {
-                swal({
-                    title: "Update Success",
-                    type: "success"
-                }, function() {
-                    window.location = "profile.php"; 
-                });
-            }, 1000);
-        </script>';
     } else {
-        echo '<script>
-            setTimeout(function() {
-                swal({
-                    title: "Error!",
-                    type: "error"
-                }, function() {
-                    window.location = "profile.php"; 
-                });
-            }, 1000);
-        </script>';
+        $conn = conndb();
+        $user_id = $_SESSION['user_login'];
+
+        $stmt = $conn->prepare("UPDATE users SET username=:username, email=:email, first_name=:firstname, last_name=:lastname, date_of_birth=:dob, address=:address WHERE user_id=:user_id");
+        $stmt->bindParam(":firstname", $firstname);
+        $stmt->bindParam(":lastname", $lastname);
+        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":dob", $dob);
+        $stmt->bindParam(":address", $address);
+        $stmt->bindParam(":user_id", $user_id);
+
+        $result = $stmt->execute();
+
+        if ($result) {
+            echo '<script>
+                setTimeout(function() {
+                    swal({
+                        title: "Update Success",
+                        type: "success"
+                    }, function() {
+                        window.location = "profile.php"; 
+                    });
+                }, 1000);
+            </script>';
+        } else {
+            echo '<script>
+                setTimeout(function() {
+                    swal({
+                        title: "Error!",
+                        type: "error"
+                    },function() {
+                        window.location = "profile.php"; 
+                    });
+                }, 1000);
+            </script>';
+        }
     }
 }
 ?>

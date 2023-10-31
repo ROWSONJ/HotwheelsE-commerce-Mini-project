@@ -353,8 +353,14 @@
                     },
                     success: function (response) {
                       if (response === "success") {
-                        // Redirect to the homepage after successful deletion
-                        window.location.href = "../views/index.php";
+                        Swal.fire({
+                          title: "Success",
+                          text: "Your account has been successfully deleted.",
+                          icon: "success",
+                        }).then(() => {
+                          // Redirect to the homepage after successful deletion
+                          window.location.href = "../views/index.php";
+                        });
                       } else {
                         Swal.fire("Error", "Wrong password!", "error");
                       }
@@ -429,7 +435,7 @@
                 echo '<img src="../assets/images/upload/' . $row['user_image'] . '">';
             }
           ?>
-          <h2> <?php echo $row['username']?></h2>
+          <h2><?php echo $row['username']?></h2>
 
           <p><?php echo $row['first_name'].' '.$row['last_name']?></p>
 
@@ -509,12 +515,12 @@
       </div>
       <div class=" mb-3">
         <label for="formFile" class="form-label">Username</label>
-        <input type="text" class="form-control" value=" <?php echo $row['username']?>"  name="username" >
+        <input type="text" class="form-control" value="<?php echo $row['username']?>"  name="username" >
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">First name & Last name</label>
-        <input type="text" class="form-control" value=" <?php echo $row['first_name']?>" name="firstname">
-        <input type="text"  class="form-control" value=" <?php echo $row['last_name']?>" name="lastname" style="margin-top:2px;">
+        <input type="text" class="form-control" value="<?php echo $row['first_name']?>" name="firstname">
+        <input type="text"  class="form-control" value="<?php echo $row['last_name']?>" name="lastname" style="margin-top:2px;">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email</label>
@@ -523,11 +529,11 @@
       </div>
       <div class="mb-3">
         <label for="formFile" class="form-label">Date Of Birth</label>
-        <input type="date"  class="form-control" value=" <?php echo $row['date_of_birth']?>" name="dob">
+        <input type="date"  class="form-control" value="<?php echo $row['date_of_birth']?>" name="dob">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-        <input type="text"  class="form-control" value=" <?php echo $row['address']?>" name="address" >
+        <input type="text"  class="form-control" value="<?php echo $row['address']?>" name="address" >
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
