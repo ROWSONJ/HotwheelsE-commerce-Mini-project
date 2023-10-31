@@ -187,7 +187,7 @@
                 }
               }
                 echo '<li class="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
+                <span>Total (THB)</span>
                 <strong>฿ ' . $alltotal . '</strong>
               </li>';
             }

@@ -93,7 +93,7 @@ if ($user) {
                 <p class="cart-item-name">
                     <a href="#" class="a-item-name"> ' . $row['product_name'] . ' </a>
                 </p>
-                <span class="cart-item-price">$ ' . $row['total'] . '</span>
+                <span class="cart-item-price">฿ ' . $row['total'] . '</span>
             </div>
         </div>';
         }
@@ -101,7 +101,7 @@ if ($user) {
         echo '</div>
         <div class="cart-bottom">
                 <div class="cart-total">
-                <h6>Total: <span class="cart-total-cast">$ ' . $alltotal . '</span></h6>
+                <h6>Total: <span class="cart-total-cast">฿ ' . $alltotal . '</span></h6>
                 </div>
                 <div class="cart-button">
                   <a href="../views/checkout.php" class="cart-btn2">View Cart(' . $rowCount . ')</a>

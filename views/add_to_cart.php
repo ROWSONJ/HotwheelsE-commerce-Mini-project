@@ -8,11 +8,6 @@ if (isset($_SESSION['user_login'])) {
 } else {
     $user_id = ''; // or any default value you want
 }
-if (isset($_SESSION['user_login'])) {
-    $user = $_SESSION['user_login'];
-} else {
-    $user = ''; // or any default value you want
-}
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
