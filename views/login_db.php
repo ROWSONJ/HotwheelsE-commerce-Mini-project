@@ -45,7 +45,16 @@
                                 }, 1000);
                             </script>';
                             $_SESSION['user_login'] = $row['user_id'];
-                            header("location: index.php");
+                            echo '<script>
+                                setTimeout(function() {
+                                    swal({
+                                        title: "Login Success!",
+                                        type: "success"
+                                    }, function() {
+                                        window.location = "index.php"; 
+                                    });
+                                }, 1000);
+                            </script>';
                         }else{
                             $_SESSION['error'] = 'Wrong password!';
                             header("location: ../views/login.php");

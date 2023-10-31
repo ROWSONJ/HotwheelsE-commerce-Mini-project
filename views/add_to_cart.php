@@ -8,6 +8,12 @@ if (isset($_SESSION['user_login'])) {
 } else {
     $user_id = ''; // or any default value you want
 }
+if (isset($_SESSION['user_login'])) {
+    $user = $_SESSION['user_login'];
+} else {
+    $user = ''; // or any default value you want
+}
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_SESSION['user_login'])) {
@@ -42,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($updateStmt->execute()) {
                 // Cart item successfully updated
                 echo "Cart item updated";
-                header("refresh: 1; url=http://localhost" . $_SESSION['current_page']);
+                header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
             } else {
                 // Handle the update error
                 echo "Error: " . $updateStmt->errorInfo();
