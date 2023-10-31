@@ -1,5 +1,6 @@
 <?php
  require '../global/conn.php';
+ require '../global/header.php'; 
 ?>
 
 <!DOCTYPE html>
