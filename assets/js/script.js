@@ -183,62 +183,37 @@ document.addEventListener('DOMContentLoaded', function () {
  *  */
 
 document.addEventListener("DOMContentLoaded", function() {
-  // Add a click event listener to the "Add to Cart" button
-  const addToCartButton = document.getElementById("add to cart");
+  const addToCartButton = document.getElementById("add-to-cart");
+  const sellProductButton = document.getElementById("sell-product");
 
-  if (addToCartButton) {
-    console.log("Found");
-  }else{
-    console.log("Not found");
+  if (addToCartButton && sellProductButton) {
+    console.log("Both buttons found");
+  } else {
+    console.log("At least one button not found");
+  }
+
+  function handleLoginForAction(button, actionMessage) {
+    if (!userIsLoggedIn) {
+      const confirmation = window.confirm(`Please login before ${actionMessage}. Do you want to go to the login page?`);
+      if (confirmation) {
+        window.location.href = "http://localhost/mini-project-yrs3/mini-project/views/login.php";
+      }
+    }
   }
 
   if (addToCartButton) {
     addToCartButton.addEventListener("click", function() {
-      if (userIsLoggedIn) {
-        // User is logged in, proceed to add to cart with quantity, price, user_id, and status
-        const quantity = 1; // Set quantity to 1 by default
-        const status = "active"; // Set the default status
-        
-        addToCart(user_id, product_id, quantity, total, status);
-      } else {
-        // User is not logged in, redirect to the login page
-        const confirmation = window.confirm("Please login before adding to cart. Do you want to go to the login page?");
-        if (confirmation) {
-          // If the user clicks "OK," redirect to the login page
-          window.location.href = "http://localhost/mini-project-yrs3/mini-project/views/login.php";
-        }
-      }
+      handleLoginForAction(addToCartButton, "adding to cart");
     });
   }
 
-  // Function to add the item to the cart with productId, quantity, price, user_id, and status
-  function addToCart(userId, productId , quantity, total, status) {
-    // You can also include additional validation here
-
-    // Perform an AJAX request to insert the item into the cart
-    // Example using Fetch API
-    fetch('add_to_cart.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({product_id: productId, quantity: quantity, total: total, user_id: userId, status: status }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Handle the response (e.g., display a success message or handle errors)
-        console.log(data);
-        if (data.success) {
-          alert('Item added to the cart successfully');
-        } else {
-          alert('Failed to add the item to the cart');
-        }
-      })
-      .catch(error => {
-        console.error('An error occurred:', error);
-      });
+  if (sellProductButton) {
+    sellProductButton.addEventListener("click", function() {
+      handleLoginForAction(sellProductButton, "selling this product");
+    });
   }
 });
+
 
 // Other JavaScript functions and logic here
 

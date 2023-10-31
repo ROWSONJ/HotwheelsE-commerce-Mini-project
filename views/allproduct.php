@@ -143,7 +143,7 @@ if (!empty($product_id)) {
 $sql .= " AND p.product_id = '$product_id'";
 }
 
-$sql .= " ORDER BY p.Release_Date DESC LIMIT 8";
+$sql .= " ORDER BY p.Release_Date DESC";
  
 $result= tablequery($sql);
   if ($result) {

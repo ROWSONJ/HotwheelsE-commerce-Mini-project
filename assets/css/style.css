@@ -1140,6 +1140,14 @@ a.footer-link:is(:hover, :focus) { color: var(--bittersweet); }
   pointer-events: all;
 }
 
+.cart-item-empty{
+  padding: 30px;
+  text-align: center;
+}
+.cart-text-empty{
+  margin-bottom: 30px;
+}
+
 .cart {
   position: fixed;
   right: 0;

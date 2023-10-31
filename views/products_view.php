@@ -6,6 +6,8 @@ if (!isset($_GET['product_id'])) {
 }
 $getid = $_GET['product_id'];
 
+$_SERVER['pervious_page'] = $_SERVER['PHP_SELF'];
+
 if (isset($_POST['add_to_cart'])) {
   $product_id = $getid;
   $user_id = $_SESSION['user_login']; // Replace with your user session variable
@@ -18,7 +20,7 @@ require '../global/conn.php'; // Assuming this is a PDO database connection scri
 require '../global/func.php';
 require '../global/header.php';
 require '../global/menubar.php';
-
+print_r($_SESSION['user_login']);
 var_dump(checklogin());
 
 $conn = conndb(); // Assuming conndb() returns a PDO connection
@@ -144,16 +146,18 @@ ob_end_flush();
                     </div>
                     </div>
                     <hr class="hr-product">
-                    <form action="../views/cart_view.php" method="post">
-                    <div class="product-action">
-                        <button class="sell-btn" type="button">Sell</button> 
-                        <button class="add-to-cart-btn">
-                          <span class="transition"></span>
-                                  <span class="gradient"></span>
-                            <span class="label" id="add to cart">Add to Cart</span>
-                              </button>
-                        <!--<button class="add-to-cart-btn" type="button">Add to Cart</button>-->
-                    </div>
+                    <form action="add_to_cart.php" method="post">
+    
+    <div class="product-action">
+        <input type="hidden" name="product_id" value="<?=$row['product_id']?>">
+        <input type="hidden" name="quantity" value="1">
+        <button class="sell-btn" type="submit" id="sell-product">Sell</button>
+        <button class="add-to-cart-btn" type="submit" id="add-to-cart">
+            <span>Add to Cart</span>
+        </button>
+    </div>
+</form>
+
                 </div>
             </div>
         </section>
@@ -266,6 +270,10 @@ ob_end_flush();
           </div>
 
         </div>
+        <div id="cart-success-alert" class="cart-alert" style="display: none;">
+    <p>Item added to cart successfully!</p>
+</div>
+
       </section>
           </article>
     </main>

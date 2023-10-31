@@ -1,58 +1,105 @@
 <?php
+require '../global/conn.php';
+require '../global/func.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Assuming you have a database connection, require it here
-    require '../global/conn.php';
+// Include your database connection code here
+$user_id = $_SESSION['user_login'];
 
-    // Retrieve data sent from the JavaScript code
-    $product_id = $_POST['product_id'];
-    $quantity = $_POST['quantity'];
-    $total = $_POST['total'];
-    $user_id = $_POST['user_id'];
-    $status = $_POST['status'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_SESSION['user_login'])) {
+        // Get product_id and quantity from the form
+        $product_id = $_POST['product_id'];
+        $quantity = $_POST['quantity'];
+        $conn = conndb();
 
-    // Add additional validation and sanitization as needed
+        // Query the carts table to check if a cart item with the same user_id and product_id exists
+        $sql = "SELECT * FROM carts WHERE user_id = :user_id AND product_id = :product_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':product_id', $product_id);
+        $stmt->execute();
+        $cartItem = $stmt->fetch();
 
-    // Check if the product with the same product_id exists in the cart
-    $conn = conndb(); // Replace with your database connection function
-    $stmt = $conn->prepare("SELECT * FROM carts WHERE user_id = ? AND product_id = ?");
-    $stmt->bind_param("ii", $user_id, $product_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $stmt->close();
+        if ($cartItem) {
+            // The cart item already exists, update it with new quantity and total
+            $newQuantity = $cartItem['quantity'] + $quantity;
+            $newTotal = $newQuantity * $cartItem['total'];
+            $updated_at = date('Y-m-d H:i:s');
+            
+            $updateSql = "UPDATE carts SET quantity = :quantity, total = :total, updated_at = :updated_at WHERE user_id = :user_id AND product_id = :product_id";
 
-    if ($result->num_rows > 0) {
-        // Product already exists in the cart, update quantity and price
-        $row = $result->fetch_assoc();
-        $new_quantity = $row['quantity'] + $quantity;
-        $new_price = $row['total'] + $total;
-
-        $stmt = $conn->prepare("UPDATE carts SET quantity = ?, total = ? WHERE user_id = ? AND product_id = ?");
-        $stmt->bind_param("diid", $new_quantity, $new_total, $user_id, $product_id);
-        $success = $stmt->execute();
-        $stmt->close();
-        $cart_id = $row['cart_id'];
+            $updateStmt = $conn->prepare($updateSql);
+            $updateStmt->bindParam(':quantity', $newQuantity);
+            $updateStmt->bindParam(':total', $newTotal);
+            $updateStmt->bindParam(':user_id', $user_id);
+            $updateStmt->bindParam(':product_id', $product_id);
+            $updateStmt->bindParam(':updated_at', $updated_at);
+            
+            if ($updateStmt->execute()) {
+                // Cart item successfully updated
+                echo "Cart item updated";
+                header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
+            } else {
+                // Handle the update error
+                echo "Error: " . $updateStmt->errorInfo();
+                header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
+            }
+        } else {
+            // The cart item doesn't exist, insert a new record
+            $product = getProductDetails($conn, $product_id);
+            
+            if ($product) {
+                // Calculate the total cost based on the product's price and quantity
+                $total = $product['price'] * $quantity;
+                
+                $status = "active";
+                $created_at = date('Y-m-d H:i:s');
+                $updated_at = date('Y-m-d H:i:s');
+                
+                $insertSql = "INSERT INTO carts (user_id, product_id, quantity, total, status, created_at, updated_at)
+                        VALUES (:user_id, :product_id, :quantity, :total, :status, :created_at, :updated_at)";
+                $insertStmt = $conn->prepare($insertSql);
+                $insertStmt->bindParam(':user_id', $user_id);
+                $insertStmt->bindParam(':product_id', $product_id);
+                $insertStmt->bindParam(':quantity', $quantity);
+                $insertStmt->bindParam(':total', $total);
+                $insertStmt->bindParam(':status', $status);
+                $insertStmt->bindParam(':created_at', $created_at);
+                $insertStmt->bindParam(':updated_at', $updated_at);
+                
+                if ($insertStmt->execute()) {
+                    // Cart item successfully added
+                    echo "Cart item added";
+                    header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
+                } else {
+                    // Handle the insertion error
+                    echo "Error: " . $insertStmt->errorInfo();
+                    header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
+                }
+            } else {
+                // Handle the case where the product doesn't exist
+                echo "Product not found.";
+                header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
+            }
+        }
     } else {
-        // Product doesn't exist in the cart, insert a new row
-        $stmt = $conn->prepare("INSERT INTO carts (user_id, product_id, quantity, total, status) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("iiids", $user_id, $product_id, $quantity, $total, $status);
-        $success = $stmt->execute();
-        $stmt->close();
-        $cart_id = $conn->insert_id; // Get the generated cart_id
-    }
-
-    // Close the database connection
-    $conn->close();
-
-    if ($success) {
-        $response = ['success' => true, 'message' => 'Item added to the cart successfully', 'cart_id' => $cart_id];
-    } else {
-        $response = ['success' => false, 'message' => 'Failed to add the item to the cart'];
+        // Handle the case where user_id is not valid or not available
+        echo "Invalid user or not logged in. Insert/Update canceled.";
+        header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
     }
 } else {
-    $response = ['success' => false, 'message' => 'Invalid request'];
+    // Handle the case where the request method is not POST
+    echo "Invalid request method.";
+    header("refresh: 1; url=http://localhost/mini-project-yrs3/mini-project/views/products_view.php?product_id=" . $product_id);
 }
 
-header('Content-Type: application/json');
-echo json_encode($response);
+function getProductDetails($conn, $product_id) {
+    // Query the product details based on product_id
+    $sql = "SELECT price FROM products WHERE product_id = :product_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':product_id', $product_id);
+    $stmt->execute();
+
+    return $stmt->fetch();
+}
 ?>

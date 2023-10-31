@@ -74,7 +74,7 @@
       <!-- 
         - #UPCOMING
       -->
-      <section class="section upcoming">
+      <section class="section upcoming" id="upcoming">
         <div class="container">
           <h2 class="h2 section-title">Upcoming Release</h2>
       <?php
