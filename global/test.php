@@ -16,14 +16,31 @@
         <div class="container">
           <h2 class="h2 section-title">Upcoming Release</h2>
       <?php
-      $result = tablequery('SELECT * FROM bannerlists');
+      $result = tablequery('SELECT b.*, p.Release_Date FROM bannerlists b join products p on b.product_id = p.product_id WHERE p.Release_Date order by p.Release_Date DESC ');
       if ($result) {
         // Use foreach to iterate through the result set
         foreach ($result as $row)  { 
             echo '<div class = "section upcoming-list" style="background-image: url(../assets/images/' . $row['bn_image'] . ')">
-            <div class="container '.$row['text_layout'].'">
-                      <h2 class="h1 hero-title">
-                        <span>
+            <div class="container '.$row['text_layout'].'">';
+
+            $releaseDate = strtotime($row['Release_Date']);
+            $currentTime = time();
+            
+            if ($releaseDate > $currentTime) {
+                // Display the timer container only if the release date is in the future
+                echo '<div class="timer-container" release_date="' . $row['Release_Date'] . '">
+                          <div class="clock" id="#">
+                            <span id="day">00</span>
+                            <span>:</span>
+                            <span id="hrs">00</span>
+                            <span>:</span>
+                            <span id="mins">00</span>
+                            <span>:</span>
+                            <span id="sec">00</span>
+                          </div>
+                        </div>';
+            }
+                echo' <h2 class="h1 hero-title">
                         <strong>' . $row['bannerlist_infoL1'] . '</strong>
                       </h2>
                       <p class="hero-text">
@@ -47,34 +64,33 @@
     <!-- Your payment form goes here -->
 
     <script>
-        // Set the countdown target time (in seconds)
-        const countdownDuration = 600; // 10 minutes
+        // Set the countdown target time (in seconds)// 10 minutes
 
-        const countdownElement = document.getElementById('countdown');
+        const countdownElement = document.getElementById('');
 
         function updateCountdown() {
-            const now = new Date().getTime() / 1000;
-            const targetTime = now + countdownDuration;
-            const interval = 1000; // Update every 1 second
+  const now = new Date();
+  const timeRemaining = releaseDate - now;
 
-            const countdown = setInterval(function() {
-                const currentTime = new Date().getTime() / 1000;
-                const timeRemaining = targetTime - currentTime;
+  if (timeRemaining <= 0) {
+    // Release date has passed, you can take appropriate action here
+    document.querySelector('.clock').textContent = 'Release Date has passed';
+  } else {
+    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-                if (timeRemaining <= 0) {
-                    clearInterval(countdown);
-                    countdownElement.textContent = 'Time is up!';
-                    // You can trigger an action here, e.g., disable the payment form
-                } else {
-                    const minutes = Math.floor(timeRemaining / 60);
-                    const seconds = Math.floor(timeRemaining % 60);
-                    countdownElement.textContent = `${minutes}m ${seconds}s`;
-                }
-            }, interval);
-        }
+    // Update the HTML elements
+    document.getElementById('day').textContent = String(days).padStart(2, '0');
+    document.getElementById('hrs').textContent = String(hours).padStart(2, '0');
+    document.getElementById('mins').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('sec').textContent = String(seconds).padStart(2, '0');
+  }
+}
 
-        // Start the countdown
-        updateCountdown();
+// Call the function initially to set up the timer
+updateCountdown();
     </script>
       </section>
 

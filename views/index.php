@@ -75,14 +75,32 @@
       <section class="section upcoming" id="upcoming">
         <div class="container">
           <h2 class="h2 section-title">Upcoming Release</h2>
-      <?php
-      $result = tablequery('SELECT * FROM bannerlists');
+          <?php
+      $result = tablequery('SELECT b.*, p.Release_Date FROM bannerlists b join products p on b.product_id = p.product_id WHERE p.Release_Date order by p.Release_Date DESC ');
       if ($result) {
         // Use foreach to iterate through the result set
         foreach ($result as $row)  { 
             echo '<div class = "section upcoming-list" style="background-image: url(../assets/images/' . $row['bn_image'] . ')">
-            <div class="container '.$row['text_layout'].'">
-                      <h2 class="h1 hero-title">
+            <div class="container '.$row['text_layout'].'">';
+
+            $releaseDate = strtotime($row['Release_Date']);
+            $currentTime = time();
+            
+            if ($releaseDate > $currentTime) {
+                // Display the timer container only if the release date is in the future
+                echo '<div class="timer-container" release_date="' . $row['Release_Date'] . '">
+                          <div class="clock" id="#">
+                            <span id="day">00</span>
+                            <span>:</span>
+                            <span id="hrs">00</span>
+                            <span>:</span>
+                            <span id="mins">00</span>
+                            <span>:</span>
+                            <span id="sec">00</span>
+                          </div>
+                        </div>';
+            }
+                echo' <h2 class="h1 hero-title">
                         <strong>' . $row['bannerlist_infoL1'] . '</strong>
                       </h2>
                       <p class="hero-text">
