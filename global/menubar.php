@@ -1,7 +1,11 @@
 <?php
   $_SESSION['current_page'] = $_SERVER['REQUEST_URI']; 
-  print_r($_SESSION['current_page']);
-  $user = $_SESSION['user_login'];
+  if (isset($_SESSION['user_login'])) {
+    $user = $_SESSION['user_login'];
+} else {
+    $user = ''; // or any default value you want
+}
+
 
 if (!checkLogin()) {
     $link = "../views/login.php";

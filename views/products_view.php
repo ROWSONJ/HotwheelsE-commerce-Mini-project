@@ -20,8 +20,7 @@ require '../global/conn.php'; // Assuming this is a PDO database connection scri
 require '../global/func.php';
 require '../global/header.php';
 require '../global/menubar.php';
-print_r($_SESSION['user_login']);
-var_dump(checklogin());
+
 
 $conn = conndb(); // Assuming conndb() returns a PDO connection
 $sql = "SELECT p.*, c.category_name, b.carbrand_name FROM products p

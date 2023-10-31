@@ -6,8 +6,7 @@
 
   $_SERVER['pervious_page'] = $_SERVER['PHP_SELF'];
 
-  var_dump(checkLogin());
-  var_dump($_SESSION['user_login']);
+  
 ?>
   <main>
     <article>

@@ -4,7 +4,11 @@
   require '../global/header.php'; 
   require '../global/menubar.php';
 
-  $product_id = $_GET['product_id'];
+  if (isset($_POST['product_id'])) {
+    $product_id = $_POST['product_id'];
+} else {
+    $product_id = ''; // or any default value you want
+}
 ?>
 
     <main>
